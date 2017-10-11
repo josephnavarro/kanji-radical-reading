@@ -57,15 +57,20 @@ def extract_lines(_file):
     return output
 
 
-def dictionary(_input):
+def split(string, delim):
+    ## 簡単にストリングを分ける
+    return string.split(delim)
+
+
+def dictionary(_input, delim):
     ## _inputからのラインを「：」で分けて、dictを戻す
-    return {k:v for k,v in [l.split(DELIM) for l in _input]}
+    return {k:split(v,COMMA) for k,v in [split(l,COLON) for l in _input]}
 
     
 def parse(filename):
     ## テキストファイルを開けて内容を読んで、その中に書いてあったデータを戻す
     with open(filename, "r") as f:
-        return dictionary(extract_lines(f))
+        return dictionary(extract_lines(f), COLON)
         
     return {}
 
