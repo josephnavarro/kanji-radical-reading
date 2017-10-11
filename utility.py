@@ -62,17 +62,30 @@ def split(string, delim):
     return string.split(delim)
 
 
-def update_dict(_dict, func=lambda x:x):
-    ## _inputからのラインを「：」で分けて、dictを戻す
-    return {k:func(v) for k,v in _dict}
+def add_entry(_dict, key, value):
+    ## dictに(key,value)を入力する
+    ## 同じkeyがある場合、valueを一つのリストに集める
+    
+    if key in _dict.keys():
+        _dict[key] = list(_dict[key])
+        _dict[key].append(value)      
+    else:
+        _dict[key] = value
+
+
+def make_dict(pairs, func=lambda x:x):
+    ## pairsから入力した関数でdictを作って戻す
+    output = {}
+    for k,v in pairs:
+        add_entry(output, k, func(v))
+    return output
 
     
 def parse(filename):
     ## テキストファイルを開けて内容を読んで、その中に書いてあったデータを戻す
     with open(filename, "r") as f:
         l = extract_lines(f)
-        l = dict([split(l,COLON) for l in lines])
-        return update_dict(l)
+        return make_dict([split(l,COLON) for l in lines])
         
     return {}
 
