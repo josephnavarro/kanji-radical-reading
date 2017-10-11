@@ -4,7 +4,7 @@ import os
 ## 定数集
 ## 他のファイルで使われている定数
 
-TITLE = "漢字の部首で読もう"
+TITLE = '漢字の部首で読もう'
 SIZE  = W,H = 800,600  ## 外面サイズ
 FPS   = 60             ## リフレッシュレート
 
@@ -54,5 +54,10 @@ DATA_DIR = os.path.join(DIR_ROOT, DIR_DATA)
 F_EXT = '.lmao'  ## レベルや一般的なコンフィグレーションなどの拡張子
 F_CFG = 'config' ## コンフィグレーションのファイルネーム
 
+## パーサーの定数
+DELIM  = ':'
+IGNORE = '#'
 
 
+## パーサーからの変数
+VAR_FONT = 'font'

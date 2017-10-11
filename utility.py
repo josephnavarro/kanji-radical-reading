@@ -37,6 +37,36 @@ def null_function():
 
 
 def load_image(filename):
-    ## Loads a bitmap image
+    ## ビットマップファイルを開けて戻す
     image = pygame.image.load(filename).convert_alpha()
     return image
+
+
+def clean_line(string):
+    ## パーサーのために不要な文字を消して戻す
+    string = string.split(IGNORE)[0]
+    string = ' '.join(string.split())
+    return string
+    
+
+def extract_lines(_file):
+    ## ファイル算体から空白でないラインを戻す
+    lines  = _file.readlines()
+    lines  = [l for l in lines if not l.startswith(IGNORE)]
+    output = [clean_line(l) for l in lines]
+    return output
+
+
+def dictionary(_input):
+    ## _inputからのラインを「：」で分けて、dictを戻す
+    return {k:v for k,v in [l.split(DELIM) for l in _input]}
+
+    
+def parse(filename):
+    ## テキストファイルを開けて内容を読んで、その中に書いてあったデータを戻す
+    with open(filename, "r") as f:
+        return dictionary(extract_lines(f))
+        
+    return {}
+
+
