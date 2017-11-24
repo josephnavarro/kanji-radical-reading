@@ -3,14 +3,12 @@ import pygame, random
 from   pygame.locals import *
 from   constant      import *
 
-##　小テストみたいなレベルのクラス（問題とボタンの位置を含めている一般的な設計）
-
 class Stage:
     def __init__(self, questions=[]):
-        ##　構築子
+        ## A single level
         self.update_list(questions) ##　
 
-    def update_list(self, sentences):
+    def update_list(self, questions):
         ## Initializes randomized pool of questions
         self.questions = questions[:]  ## Copy list of strings
         random.shuffle(self.questions) ## Randomize order of sentences

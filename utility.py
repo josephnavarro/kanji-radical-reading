@@ -2,70 +2,63 @@
 import pygame
 from   pygame.locals import *
 
-## どこでも使われている関数
+## Functions used universally
 
 def _quit():
-    ## ゲームを閉める
+    ## Safely quit game
     pygame.quit()
     raise SystemExit
 
-
 def get_input(events):
-    ## ゲーム中でマウスとキーボードの入力を使う
+    ## Get mouse input
     for e in events:
         if e.type == QUIT:
-            ## 右上のボタンを押てウィンドウを消したい場合
+            ## Click [x] to exit window
             _quit()
 
         elif e.type == KEYDOWN:
-            ## キーボードで入力した場合
+            ## Keypress processing
             if e.key == K_ESCAPE:
-                ## キーでゲームを閉める場合
+                ## Press ESC to exit window
                 _quit()
         
         elif e.type == MOUSEBUTTONDOWN:
-            ## クリックしたマウスの位置を戻す
+            ## Get mouse pos on click
             return pygame.mouse.get_pos()
 
-    ## ディフォルトに戻すもの
+    ## Default return value
     return (-1,-1)
 
 
 def null_function():
-    ## 何も書いていないので、おかしそうですが、実はこれは大切な関数である
+    ## Do-nothing function returned by default from a button
     pass
 
-
 def load_image(filename):
-    ## ビットマップファイルを開けて戻す
+    ## Load image with alpha transparency
     image = pygame.image.load(filename).convert_alpha()
     return image
 
-
 def clean_line(string):
-    ## パーサーのために不要な文字を消して戻す
+    ## Removes in-line comments from script
     string = string.split(IGNORE)[0]
     string = ' '.join(string.split())
     return string
-    
 
 def extract_lines(_file):
-    ## ファイル算体から空白でないラインを戻す
+    ## Removes comments from script
     lines  = _file.readlines()
     lines  = [l for l in lines if not l.startswith(IGNORE)]
     output = [clean_line(l) for l in lines]
     return output
 
-
 def split(string, delim):
-    ## 簡単に部分を分ける
+    ## Splits a string according to a delimiter
     return string.split(delim)
 
 
 def add_entry(_dict, key, value):
-    ## dictに(key,value)を入力する
-    ## 同じkeyがある場合、valueを一つのリストに集める
-    
+    ## Adds a value to a dictionary
     if key in _dict.keys():
         _dict[key] = list(_dict[key])
         _dict[key].append(value)      
@@ -74,7 +67,7 @@ def add_entry(_dict, key, value):
 
 
 def make_dict(pairs, func=lambda x:x):
-    ## pairsから入力した関数でdictを作って戻す
+    ## Instantiates a new dictionary
     output = {}
     for k,v in pairs:
         add_entry(output, k, func(v))
@@ -82,7 +75,7 @@ def make_dict(pairs, func=lambda x:x):
 
     
 def parse(filename):
-    ## テキストファイルを開けて内容を読んで、その中に書いてあったデータを戻す
+    ## Parses a file and makes a dictionary
     with open(filename, "r") as f:
         l = extract_lines(f)
         return make_dict([split(l,COLON) for l in lines])

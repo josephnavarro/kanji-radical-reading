@@ -6,7 +6,7 @@ from   prompt        import *
 from   button        import *
 from   text          import *
 
-##　「stage」の算体の中での入力促進と答えの三つのボタン
+## A single stage's question instance
 
 class Question:
     def __init__(self, ):
