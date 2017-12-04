@@ -24,7 +24,7 @@ def get_kanji(_dict, path, base, ext='*.png'):
     for filename in glob.glob(ext):
         if base in filename:
             image  = load_image(filename)
-            onyomi = base.split(DASH)
+            onyomi = base.split(SPACE)[1]
             values = {
                 'image':  image,
                 'onyomi': onyomi,
