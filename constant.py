@@ -11,8 +11,8 @@ FONTSIZE = 108
 BLACK = (0,0,0)
 
 ## GUI button placement
-KANJI_VERT = [H//3 for n in range(2)]
-KANJI_HORZ = [W*2//10, W*5//10]
+KANJI_VERT = [H//4 for n in range(2)]
+KANJI_HORZ = [W*3//18, W*8//18]
 BUTTON_HORZ = [W*8//12 for n in range(3)] ## Button y-coordinates
 BUTTON_VERT = [H*(n+1)//5 for n in range(3)] ## Button x-coordinates
 
