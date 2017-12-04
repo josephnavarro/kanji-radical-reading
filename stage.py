@@ -19,8 +19,10 @@ class Stage:
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
 
-        button_up     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3a.png'))
-        button_down   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3b.png'))
+        btn_string = 'button4' if is_onyomi else 'button3'
+
+        button_up     = load_image(os.path.join(DIR_ROOT, DIR_IMG, '%sa.png' %(btn_string)))
+        button_down   = load_image(os.path.join(DIR_ROOT, DIR_IMG, '%sb.png'%(btn_string)))
         self.button_images = [button_up, button_down]
         self.button_size   = button_up.get_size()
 
@@ -31,7 +33,7 @@ class Stage:
         radical_labels = [kan_img, ken_img, sei_img]
 
         for x in range(len(radical_labels)):
-            radical_labels[x] = pygame.transform.smoothscale(radical_labels[x], (64,64))
+            radical_labels[x] = pygame.transform.smoothscale(radical_labels[x], (128,128))
 
         others = []
         for word in words:
