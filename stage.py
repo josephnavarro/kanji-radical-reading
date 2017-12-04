@@ -26,9 +26,12 @@ class Stage:
 
             self.questions.append(Question(images, is_onyomi))
 
+        self.current = 0
+
     def render(self, screen):
         ## Renders self to screen
         screen.blit(self.background, (0,0))
+        self.questions[self.current].render(screen)
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
