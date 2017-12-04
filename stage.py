@@ -29,6 +29,9 @@ class Stage:
 
         radical_labels = [kan_img, ken_img, sei_img]
 
+        for x in range(len(radical_labels)):
+            radical_labels[x] = pygame.transform.smoothscale(radical_labels[x], (64,64))
+
         others = []
         for word in words:
             r = readings[word[0]]['other']
