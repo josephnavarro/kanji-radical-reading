@@ -29,6 +29,7 @@ class Main:
         self.data_file = os.path.join(DIR_ROOT, DIR_DATA, FILE_DEFINITION)
         self.image_dir = os.path.join(DIR_ROOT, DIR_IMG)
         self.base_dir  = os.path.join(DIR_ROOT, DIR_BASE)
+        self.kanji_dir  = os.path.join(DIR_ROOT, DIR_KANJI)
 
     def init_images(self):
         ## Gets base strings for kanji
@@ -36,17 +37,18 @@ class Main:
         base_strings = []
         for k,v in bases.items():
             for n in range(v):
-                base_strings.append('%s%d' %(k,v))
-
+                base_strings.append('%s%d' %(k,(n+1)))
+                
         self.word_img = {}
         for base in base_strings:
-            words = get_words(self.image_dir, base)
+            words = get_words(self.kanji_dir, base)
             self.word_img.update(words)
             
         self.base_img = {}
         for base in base_strings:
-            base = get_bases(self.base_dir, base)
-            self.base_img.update(base)
+            
+            base_dict = get_bases(self.base_dir, base)
+            self.base_img.update({base:base_dict})
 
     def init_data(self):
         ## Populates string-based data members
@@ -61,25 +63,25 @@ class Main:
         ## Initialization of general utility objects
         base_full = []
         base_part = []
-        base_imgs = []
+        base_keys = []
         
         for k,v in self.base_img.items():
             full_img = v['full']
             part_img = v['none']
             base_full.append(full_img)
             base_part.append(part_img)
-            base_imgs.append(k)
+            base_keys.append(k)
         
         self.modes = {
             MODE_TITLE:   None,
             MODE_ONYOMI:  Stage(
-                base_imgs,
+                base_keys,
                 base_full,
                 self.word_parts,
                 self.word_defs,
                 ),
             MODE_RADICAL: Stage(
-                base_imgs,
+                base_keys,
                 base_part,
                 self.word_parts,
                 self.word_defs,

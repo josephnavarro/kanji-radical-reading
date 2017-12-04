@@ -13,10 +13,10 @@ def _quit():
 def get_words(path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
     _dict = {}
-    for filename in glob.glob(ext):
+    for filename in glob.glob(path + '/*.png'):
         if base in filename:
             image  = load_image(filename)
-            onyomi = filename.split(SPACE)[1]
+            onyomi = filename.split(SPACE)[1].rstrip('.png')
             add_entry(_dict, base, {onyomi: image})
 
     return _dict
@@ -24,13 +24,16 @@ def get_words(path, base, ext='*.png'):
 def get_bases(path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
     _dict = {}
-    for filename in glob.glob(ext):
+    full  = None
+    none  = None
+    for filename in glob.glob(path + '/*.png'):
         if base in filename:
-            image1 = load_image(filename)
-            image2 = load_image(base + '-none.png')
-            add_entry(_dict, base, {'full':image1, 'none':image2})
+            if 'none' in filename:
+                none = load_image(filename)
+            else:
+                full = load_image(filename)
 
-    return _dict
+    return {'none':none, 'full':full}
 
 def get_input(events):
     ## Get mouse input
