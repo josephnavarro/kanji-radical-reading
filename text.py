@@ -31,4 +31,4 @@ class Text:
 
     def render(self, screen, pos):
         ## Render self to screen at pos
-        screen.blit(self.blittable, pos)
+        screen.blit(self.blittable, self.blittable.get_rect(midtop=pos))

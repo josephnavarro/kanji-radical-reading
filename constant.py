@@ -7,12 +7,12 @@ import os
 TITLE = "Reading Kanji with Radicals" ## Window caption
 SIZE  = W,H = 800,600      ## Screen size
 FPS   = 60                 ## Screen refresh rate
-FONTSIZE = 24
+FONTSIZE = 108
 BLACK = (0,0,0)
 
 ## GUI button placement
 KANJI_VERT = [H//3 for n in range(2)]
-KANJI_HORZ = [W*3//9, W*6//9]
+KANJI_HORZ = [W*2//10, W*5//10]
 BTNVERT = [480     for n in range(3)] ## Button y-coordinates
 BTNHORZ = [W/(3-n) for n in range(3)] ## Button x-coordinates
 
@@ -25,7 +25,7 @@ MODE_ONYOMI  = 'onyomi'  ## On'yomi given (choose radical)
 MODE_RADICAL = 'radical' ## Radical given (choose on'yomi)
 
 ## Vertical pixel offset when a button is pressed
-DEPRESS = 0
+OFFSET_Y = 128
 
 ## Folder hierarchy
 DIR_ROOT    = 'res'

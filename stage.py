@@ -41,7 +41,7 @@ class Stage:
         ## Render readings to screen
         for n in range(len(self.questions[self.current].readings)):
             self.text.render_new(self.questions[self.current].readings[n])
-            self.text.render(screen, (W*n*3//8,H*2//3))
+            self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
