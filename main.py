@@ -44,10 +44,21 @@ class Main:
 
     def init_objects(self):
         ## Initialization of general utility objects
+        base_full  = []
+        base_part  = []
+        base_roots = []
+        
+        for k,v in self.bases.items():
+            full = v['full']
+            part = v['none']
+            base_full.append(full)
+            base_part.append(part)
+            base_roots.append(k)
+        
         self.modes = {
             MODE_TITLE:   Title(),
-            MODE_ONYOMI:  Stage(),
-            MODE_RADICAL: Stage(),
+            MODE_ONYOMI:  Stage(base_roots, base_full),
+            MODE_RADICAL: Stage(base_roots, base_part),
             }
 
     def run_title(self):

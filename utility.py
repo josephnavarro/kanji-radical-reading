@@ -30,7 +30,7 @@ def get_bases(path, base, ext='*.png'):
         if base in filename:
             image1 = load_image(filename)
             image2 = load_image(base + '-none.png')
-            add_entry(_dict, base, {'base':image1, 'none':image2})
+            add_entry(_dict, base, {'full':image1, 'none':image2})
 
     return _dict
 
