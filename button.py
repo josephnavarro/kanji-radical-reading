@@ -24,9 +24,9 @@ class Button:
     def render(self, screen):
         ## Draw self to screen
         if self.isPressed:
-            screen.blit(self.pressed,   (self.x, self.y + DEPRESS))
+            screen.blit(self.pressed, (self.x,self.y))
         else:
-            screen.blit(self.unpressed, (self.x, self.y))
+            screen.blit(self.unpressed, (self.x,self.y))
 
     def on_release(self, mouseClick):
         ## Trigger on released downclick

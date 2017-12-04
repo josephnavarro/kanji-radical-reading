@@ -4,6 +4,7 @@ from   pygame.locals import *
 from   constant      import *
 from   utility       import *
 from   stage         import *
+from   button        import *
 
 ## Primary entrypoint for application
 
@@ -29,11 +30,18 @@ class Main:
         self.data_file = os.path.join(DIR_ROOT, DIR_DATA, FILE_DEFINITION)
         self.image_dir = os.path.join(DIR_ROOT, DIR_IMG)
         self.base_dir  = os.path.join(DIR_ROOT, DIR_BASE)
-        self.kanji_dir  = os.path.join(DIR_ROOT, DIR_KANJI)
+        self.kanji_dir = os.path.join(DIR_ROOT, DIR_KANJI)
 
     def init_images(self):
         ## Gets base strings for kanji
         self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, FILE_TITLE))
+        self.button_img = [
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG1A)),
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG1B)),
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2A)),
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2B)),
+            ]
+        
         bases = parse(self.base_file, lambda x:int(x))
         base_strings = []
         for k,v in bases.items():
@@ -57,7 +65,7 @@ class Main:
         onyomi      = [split(x,DASH) for x in words]
 
         self.word_onyomi = {words[n]:onyomi[n] for n in range(len(words))}
-        self.word_defs  = definitions
+        self.word_defs   = definitions
 
     def init_objects(self):
         ## Initialization of general utility objects
@@ -86,11 +94,27 @@ class Main:
                 ),
             }
 
+        pos1 = W//16,   H//2
+        pos2 = W*8//16, H//2
+
+        def toggle_onyomi():
+            self.mode = MODE_ONYOMI
+
+        def toggle_radical():
+            self.mode = MODE_RADICAL
+
+        self.onyomi_button  = Button(pos1, *self.button_img[:2],  toggle_onyomi)
+        self.radical_button = Button(pos2, *self.button_img[2:4], toggle_radical)
+
     def render(self):
         ## Render whole screen
         self.screen.blit(self.background,(0,0))
+        self.onyomi_button.render(self.screen)
+        self.radical_button.render(self.screen)
+        
         self.window.blit(self.screen, (0,0))
         pygame.display.flip()
+
 
     def main(self):
         ## Main game loop

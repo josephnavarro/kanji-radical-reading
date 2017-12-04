@@ -38,6 +38,10 @@ DIR_DATA    = 'data'
 FILE_BASE       = 'base.config'
 FILE_DEFINITION = 'definition.config'
 FILE_TITLE      = 'title.png'
+BUTTON_IMG1A    = 'button1a.png'
+BUTTON_IMG1B    = 'button1b.png'
+BUTTON_IMG2A    = 'button2a.png'
+BUTTON_IMG2B    = 'button2b.png'
 
 ## Parser delimiters
 DASH  = '-'
