@@ -3,16 +3,18 @@ import pygame, random
 from   pygame.locals import *
 from   question      import *
 from   utility       import *
+from   text          import *
 from   constant      import *
 
 class Stage:
-    def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, pronunciations, is_onyomi):
+    def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, readings, is_onyomi):
         ## A single level
         self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND))
         self.questions = []
         tag = 'none' if is_onyomi else 'full'
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
+        self.text = Text()
         
         for word in words:
             key    = word[0]
@@ -24,7 +26,10 @@ class Stage:
                 else:
                     images.append(word_img[key])
 
-            self.questions.append(Question(images, is_onyomi))
+            kana = readings[word]
+
+            newQuestion = Question(images, kana, is_onyomi)
+            self.questions.append(newQuestion)
 
         self.current = 0
 
@@ -35,4 +40,5 @@ class Stage:
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
+        
         pass

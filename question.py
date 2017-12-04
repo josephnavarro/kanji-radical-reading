@@ -9,7 +9,7 @@ from   text          import *
 ## A single stage's question instance
 
 class Question:
-    def __init__(self, images, is_onyomi):
+    def __init__(self, images, kana, is_onyomi):
         self.images = images
 
     def render(self, screen):

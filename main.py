@@ -102,8 +102,8 @@ class Main:
             base_dict = get_bases(self.base_dir, base)
             self.base_img.update({base:base_dict})
 
-        pronunciations = parse(self.data_file, lambda x:[''.join(a.split()) for a in split(x,COMMA)[1].split(DASH)])
-        for k,v in pronunciations.items():
+        readings = parse(self.data_file, lambda x:[''.join(a.split()) for a in split(x,COMMA)[1].split(DASH)])
+        for k,v in readings.items():
             v = v[0]
             s = split(k, DASH)
             newDict = {}
@@ -113,11 +113,9 @@ class Main:
             else:
                 newDict['base']  = v[1]
                 newDict['other'] = v[0]
-            pronunciations[k] = newDict
+            readings[k] = newDict
 
-        print(pronunciations)
-
-        self.pronunciations = pronunciations
+        self.readings = readings
 
     def init_objects(self):
         ## Initialization of general utility objects
@@ -134,7 +132,7 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
-                self.pronunciations,
+                self.readings,
                 is_onyomi=True
                 ),
             MODE_RADICAL: Stage(
@@ -143,7 +141,7 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
-                self.pronunciations,
+                self.readings,
                 is_onyomi=False
                 ),
             }

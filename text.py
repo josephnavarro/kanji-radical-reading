@@ -21,11 +21,13 @@ class Text:
 
     def render_new(self,string):
         ## Render a new string
-        self.blittable = self.font.render(
-            self.text,
-            self.antialias,
-            self.color,
-            )
+        if string != self.text:
+            self.text = string
+            self.blittable = self.font.render(
+                self.text,
+                self.antialias,
+                self.color,
+                )
 
     def render(self, screen, pos):
         ## Render self to screen at pos
