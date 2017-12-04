@@ -88,7 +88,7 @@ def add_entry(_dict, key, value):
         _dict[key] = list(_dict[key])
         _dict[key].append(value)      
     else:
-        _dict[key] = value
+        _dict[key] = [value]
 
 
 def make_dict(pairs, func):

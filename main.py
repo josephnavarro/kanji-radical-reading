@@ -36,7 +36,7 @@ class Main:
         bases = parse(self.base_file, lambda x:int(x))
         base_strings = []
         for k,v in bases.items():
-            for n in range(v):
+            for n in range(v[0]):
                 base_strings.append('%s%d' %(k,(n+1)))
                 
         self.word_img = {}
@@ -46,7 +46,6 @@ class Main:
             
         self.base_img = {}
         for base in base_strings:
-            
             base_dict = get_bases(self.base_dir, base)
             self.base_img.update({base:base_dict})
 
@@ -61,30 +60,23 @@ class Main:
 
     def init_objects(self):
         ## Initialization of general utility objects
-        base_full = []
-        base_part = []
         base_keys = []
         
         for k,v in self.base_img.items():
-            full_img = v['full']
-            part_img = v['none']
-            base_full.append(full_img)
-            base_part.append(part_img)
             base_keys.append(k)
 
-        
         self.modes = {
             MODE_TITLE:   None,
             MODE_ONYOMI:  Stage(
                 base_keys,
-                base_full,
+                self.base_img,
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
                 ),
             MODE_RADICAL: Stage(
                 base_keys,
-                base_part,
+                self.base_img,
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
