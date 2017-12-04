@@ -19,12 +19,13 @@ class Stage:
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
 
-        btn_string = 'button4' if is_onyomi else 'button3'
-
-        button_up     = load_image(os.path.join(DIR_ROOT, DIR_IMG, '%sa.png' %(btn_string)))
-        button_down   = load_image(os.path.join(DIR_ROOT, DIR_IMG, '%sb.png'%(btn_string)))
-        self.button_images = [button_up, button_down]
-        self.button_size   = button_up.get_size()
+        button_up1     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3a.png'))
+        button_down1   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3b.png'))
+        button_up2     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button4a.png'))
+        button_down2   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button4b.png'))
+        
+        self.button_images = [button_up1, button_down1, button_up2, button_down2]
+        self.button_sizes  = [button_up1.get_size(), button_up2.get_size()]
 
         kan_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'kan.png'))
         ken_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'ken.png'))
@@ -56,7 +57,12 @@ class Stage:
             random.shuffle(others)
             other_kana = others[:2]
 
-            newQuestion = Question(self.button_images, radical_labels, kanji_images, kana, other_kana, is_onyomi)
+            if not is_onyomi:
+                bimg = self.button_images[:2]
+            else:
+                bimg = self.button_images[2:]
+
+            newQuestion = Question(bimg, radical_labels, kanji_images, kana, other_kana, is_onyomi)
             self.questions.append(newQuestion)
 
         self.re_init(is_onyomi)
@@ -71,7 +77,7 @@ class Stage:
         self.current = 0
         random.shuffle(self.questions)
         self.is_onyomi = is_onyomi
-        self.return_button = Button((W//16,H*15//16), "Back", *self.button_images, self.return_main)
+        self.return_button = Button((32,H-128), "Back", *self.button_images[:2], self.return_main)
 
     def get_mode(self):
         return self.mode
@@ -100,24 +106,24 @@ class Stage:
         for n in range(len(buttons)):
             self.btn_text.render_new(buttons[n])
             w1,h1 = self.btn_text.blittable.get_size()
-            w2,h2 = self.button_size
+            w2,h2 = self.button_sizes[1 if self.is_onyomi else 0]
             x,y = 0,0
             if pressed[n]:
                 x,y = PRESS_X, PRESS_Y
             self.btn_text.render(screen, (
-                BUTTON_HORZ[n]+w1*3//4+x,
-                BUTTON_VERT[n]+h1//8+y))
+                BUTTON_HORZ[n]+w2//2-w1//4+x,
+                BUTTON_VERT[n]+h2//2-h1*2//3+y))
 
         self.return_button.render(screen)
         self.back_text.render_new(self.return_button.text)
         w1,h1 = self.back_text.blittable.get_size()
-        w2,h2 = self.button_size
+        w2,h2 = self.button_sizes[0]
         x,y = 0,0
         if self.return_button.isPressed:
             x,y = PRESS_X, PRESS_Y
         self.back_text.render(screen, (
-            self.return_button.x+w1*3//4+x,
-            self.return_button.y+h1//8+y))
+            self.return_button.x+w2//2-w1//4+x,
+            self.return_button.y+h2//2-h1*2//3+y))
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
