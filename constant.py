@@ -7,6 +7,8 @@ import os
 TITLE = "漢字の部首で読もう" ## Window caption
 SIZE  = W,H = 800,600      ## Screen size
 FPS   = 60                 ## Screen refresh rate
+FONTSIZE = 24
+BLACK = (0,0,0)
 
 ## GUI button placement
 KANJI_VERT = [H//3 for n in range(2)]

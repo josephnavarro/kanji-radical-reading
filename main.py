@@ -5,6 +5,7 @@ from   constant      import *
 from   utility       import *
 from   stage         import *
 from   button        import *
+from   text          import *
 
 ## Primary entrypoint for application
 
@@ -22,9 +23,7 @@ class Wrapper:
             load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG1B)),
             load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2A)),
             load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2B)),
-            ]
-        
-        
+            ]     
             
         pos1 = W//16,   H//2
         pos2 = W*8//16, H//2
