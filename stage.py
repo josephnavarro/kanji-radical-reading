@@ -60,8 +60,8 @@ class Stage:
             if pressed[n]:
                 x,y = PRESS_X, PRESS_Y
             self.btn_text.render(screen, (
-                BUTTON_HORZ[n]+w+x,
-                BUTTON_VERT[n]+h+y))
+                BUTTON_HORZ[n]+w//2+x,
+                BUTTON_VERT[n]+h//2+y))
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
