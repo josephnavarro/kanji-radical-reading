@@ -28,7 +28,7 @@ class Question:
         self.readings = kana[a], kana[b]
         self.buttons  = []
 
-        if is_onyomi:
+        if not is_onyomi:
             c = [self.base, *other_kana]
             random.shuffle(c)
 

@@ -7,7 +7,7 @@ from   utility       import *
 class Button:
     def __init__(self, pos, text, unpressed, pressed, function, image=None):
         ## Pressable button in game GUI
-        self.image     = None
+        self.image     = image
         self.pressed   = pressed   ## Image upon press
         self.unpressed = unpressed ## Image while not pressed
         self.function  = function  ## Function to execute when clicked
