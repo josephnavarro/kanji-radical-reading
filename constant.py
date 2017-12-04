@@ -26,7 +26,7 @@ STATE_BUSHU  = 'bushu'   ## Radical given (choose on'yomi)
 
 
 ## Vertical pixel offset when a button is pressed
-DOWN_CLICK = 0
+DEPRESS = 0
 
 
 ## Folder hierarchy
@@ -50,7 +50,5 @@ F_CFG = 'config' ## Configuration file
 
 
 ## Parser delimiters
-COLON  = ':'
-COMMA  = ','
-IGNORE = '#'
+DASH = '-'
 

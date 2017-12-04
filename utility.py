@@ -1,6 +1,7 @@
 #!usr/bin/env python
-import pygame
+import pygame, glob, os
 from   pygame.locals import *
+from   constant      import *
 
 ## Functions used universally
 
@@ -8,6 +9,19 @@ def _quit():
     ## Safely quit game
     pygame.quit()
     raise SystemExit
+
+def get_kanji(_dict, path, base, ext='.png'):
+    ## Get kanji from images and pair them with strings
+    os.chdir(path)
+    for filename in glob.glob(ext):
+        if base in filename:
+            image  = load_image(filename)
+            kana   = base.split(DASH)
+            values = {
+                'image': image,
+                'kana':  kana,
+                }
+            add_entry(_dict, base, values)
 
 def get_input(events):
     ## Get mouse input
