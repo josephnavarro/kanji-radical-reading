@@ -22,7 +22,13 @@ class Stage:
         button_down   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3b.png'))
         button_images = [button_up, button_down]
         self.button_size = button_up.get_size()
-        
+
+        others = []
+        for word in words:
+            r = readings[word[0]]['other']
+            if r not in others:
+                others.append(r)
+                
         for word in words:
             key    = word[0]
             wordp  = word_parts[key]
@@ -35,7 +41,10 @@ class Stage:
 
             kana = readings[key]
 
-            newQuestion = Question(button_images, kanji_images, kana, is_onyomi)
+            random.shuffle(others)
+            other_kana = others[:2]
+
+            newQuestion = Question(button_images, kanji_images, kana, other_kana, is_onyomi)
             self.questions.append(newQuestion)
 
         self.current = 0

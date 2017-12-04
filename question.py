@@ -1,5 +1,5 @@
 #!usr/bin/env python
-import pygame,os
+import pygame, os, random
 from   pygame.locals import *
 from   utility       import *
 from   constant      import *
@@ -8,18 +8,39 @@ from   text          import *
 
 ## A single stage's question instance
 
+def correct():
+    ## A correct answer
+    return True
+
+def incorrect():
+    ## An incorrect answer
+    return False
+
 class Question:
-    def __init__(self, button_images, kanji_images, kana, is_onyomi):
+    def __init__(self, button_images, kanji_images, kana, other_kana, is_onyomi):
         self.images = kanji_images
         self.base   = kana['base']
         self.other  = kana['other']
-        b1, b2      = button_images
         
         a = kana['order'][0]
         b = kana['order'][1]
         self.readings = kana[a], kana[b]
+        self.buttons  = []
 
-        self.buttons = [Button((BUTTON_HORZ[n], BUTTON_VERT[n]),'test',b1,b2,null_function) for n in range(3)]
+        c = [self.base, *other_kana]
+        random.shuffle(c)
+
+        for n in range(3):
+            pos  = BUTTON_HORZ[n], BUTTON_VERT[n]
+            text      = c[n]
+            if text == self.base:
+                fxn = correct
+            else:
+                fxn = incorrect
+            btn1      = button_images[0]
+            btn2      = button_images[1]
+            newButton = Button(pos, 'test', btn1, btn2, fxn)
+            self.buttons.append(newButton)
 
     def get_button_text(self):
         out_text = []
