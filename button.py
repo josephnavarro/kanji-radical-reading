@@ -5,11 +5,12 @@ from   constant      import *
 from   utility       import *
 
 class Button:
-    def __init__(self, pos, unpressed, pressed, function):
+    def __init__(self, pos, text, unpressed, pressed, function):
         ## Pressable button in game GUI
         self.pressed   = pressed   ## Image upon press
         self.unpressed = unpressed ## Image while not pressed
         self.function  = function  ## Function to execute when clicked
+        self.text      = text      ## Blittable text label
         self.x, self.y = pos       ## Topleft blitting pos
 
         ## Initialize local member variables
@@ -25,8 +26,13 @@ class Button:
         ## Draw self to screen
         if self.isPressed:
             screen.blit(self.pressed, (self.x,self.y))
+            pos = self.pressed.get_rect().center
+            self.text.render(screen, pos)
         else:
             screen.blit(self.unpressed, (self.x,self.y))
+            x,y = self.unpressed.get_rect().center
+            pos = x+PRESS_X, y+PRESS_Y
+            self.text.render(screen, pos)
 
     def on_release(self, mouseClick):
         ## Trigger on released downclick

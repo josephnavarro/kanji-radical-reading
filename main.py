@@ -34,8 +34,10 @@ class Wrapper:
         def toggle_radical():
             self.mode = MODE_RADICAL
 
-        self.onyomi_button  = Button(pos1, *self.button_img[:2],  toggle_onyomi)
-        self.radical_button = Button(pos2, *self.button_img[2:4], toggle_radical)
+        text_blank = Text()
+
+        self.onyomi_button  = Button(pos1, text_blank, *self.button_img[:2],  toggle_onyomi)
+        self.radical_button = Button(pos2, text_blank, *self.button_img[2:4], toggle_radical)
 
     def render(self, screen):
         ## Render buttons

@@ -16,7 +16,7 @@ class Text:
         ## Initialize default rendering constants
         self.antialias = True
         self.color     = BLACK
-        self.text      = ''
+        self.text      = None
         self.render_new('')
 
     def render_new(self, string):
@@ -29,6 +29,9 @@ class Text:
                 self.color,
                 )
 
+    def get_rect(self, **kwargs):
+        return self.blittable.get_rect(**kwargs)
+
     def render(self, screen, pos):
         ## Render self to screen at pos
-        screen.blit(self.blittable, self.blittable.get_rect(midtop=pos))
+        screen.blit(self.blittable, self.blittable.get_rect(center=pos))

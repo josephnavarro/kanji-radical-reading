@@ -25,7 +25,9 @@ MODE_ONYOMI  = 'onyomi'  ## On'yomi given (choose radical)
 MODE_RADICAL = 'radical' ## Radical given (choose on'yomi)
 
 ## Vertical pixel offset when a button is pressed
-OFFSET_Y = 128
+OFFSET_Y = 176
+PRESS_X  = 8
+PRESS_Y  = 8
 
 ## Folder hierarchy
 DIR_ROOT    = 'res'
