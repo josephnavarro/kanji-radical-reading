@@ -55,13 +55,14 @@ class Stage:
         pressed = self.questions[self.current].get_button_pressed()
         for n in range(len(buttons)):
             self.btn_text.render_new(buttons[n])
-            w,h = self.button_size
+            w1,h1 = self.btn_text.blittable.get_size()
+            w2,h2 = self.button_size
             x,y = 0,0
             if pressed[n]:
                 x,y = PRESS_X, PRESS_Y
             self.btn_text.render(screen, (
-                BUTTON_HORZ[n]+w//2+x,
-                BUTTON_VERT[n]+h//2+y))
+                BUTTON_HORZ[n]+w1*3//4+x,
+                BUTTON_VERT[n]+h1//8+y))
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
