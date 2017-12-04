@@ -14,12 +14,13 @@ class Stage:
         print("WORD_PARTS")
         print(word_parts.keys())
         print("WORD_IMG")'''
-        print(word_img.items())
-
+        print(word_img)
         words = list(word_parts.items())
-        print(words)
+        return
         for word in words:
-            q = Question(word, word_defs[word], word_parts[word])
+            print(word)
+            print(word_defs[word[0]])
+            print(word_parts[word[0]])
 
     def render(self, screen):
         ## Renders self to screen

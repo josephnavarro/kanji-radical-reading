@@ -16,7 +16,7 @@ def get_words(path, base, ext='*.png'):
     for filename in glob.glob(path + '/*.png'):
         if base in filename:
             image  = load_image(filename)
-            onyomi = filename.split(SPACE)[1].rstrip('.png')
+            onyomi = filename.replace('\\','/').split(SPACE)[0].split('/')[-1]
             add_entry(_dict, base, {onyomi: image})
 
     return _dict
