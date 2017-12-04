@@ -31,6 +31,6 @@ class Stage:
         
         pass
         
-    def update(self, tick, mouseClick):
+    def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
         pass
