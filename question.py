@@ -1,6 +1,7 @@
 #!usr/bin/env python
 import pygame
 from   pygame.locals import *
+from   utility       import *
 from   constant      import *
 from   button        import *
 from   text          import *

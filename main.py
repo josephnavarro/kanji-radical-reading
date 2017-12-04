@@ -18,9 +18,14 @@ class Main:
         self.clock  = pygame.time.Clock()           ## FPS throttler
         self.mode   = MODE_TITLE                    ## Current game state
 
+        self.init_paths()
+        self.init_images()
+        self.init_data()
+
     def init_paths(self):
         ## Initializes file paths
         self.base_file = os.path.join(DIR_ROOT, DIR_DATA, FILE_BASE)
+        self.data_file = os.path.join(DIR_ROOT, DIR_DATA, FILE_DEFINITION)
         self.image_dir = os.path.join(DIR_ROOT, DIR_IMG)
         self.base_dir  = os.path.join(DIR_ROOT, DIR_BASE)
 
@@ -41,6 +46,10 @@ class Main:
         for base in base_strings:
             base = get_bases(self.base_dir, base)
             self.bases.update(base)
+
+    def init_data(self):
+        ## Populates string-based data members
+        parse(
 
     def init_objects(self):
         ## Initialization of general utility objects

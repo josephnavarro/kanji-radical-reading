@@ -2,6 +2,7 @@
 import pygame, random
 from   pygame.locals import *
 from   question      import *
+from   utility       import *
 from   constant      import *
 
 class Stage:

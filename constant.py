@@ -30,20 +30,11 @@ DIR_IMG     = 'img'
 DIR_KANJI   = 'kanji'
 DIR_RADICAL = 'radical'
 DIR_BASE    = 'base'
-DIR_SND     = 'snd'
 DIR_DATA    = 'data'
 
 ## Files
-FILE_BASE   = 'base.config'
-
-## Directory listings
-FONT_DIR    = os.path.join(DIR_ROOT, DIR_FONT)
-IMG_DIR     = os.path.join(DIR_ROOT, DIR_IMG)
-SND_DIR     = os.path.join(DIR_ROOT, DIR_SND)
-DATA_DIR    = os.path.join(DIR_ROOT, DIR_DATA)
-KANJI_DIR   = os.path.join(DIR_ROOT, DIR_KANJI)
-RADICAL_DIR = os.path.join(DIR_ROOT, DIR_KANJI)
-BASE_DIR    = os.path.join(DIR_ROOT, DIR_KANJI)
+FILE_BASE       = 'base.config'
+FILE_DEFINITION = 'definition.config'
 
 ## Parser delimiters
 DASH  = '-'
