@@ -37,6 +37,7 @@ DIR_DATA    = 'data'
 ## Files
 FILE_BASE       = 'base.config'
 FILE_DEFINITION = 'definition.config'
+FILE_TITLE      = 'title.png'
 
 ## Parser delimiters
 DASH  = '-'

@@ -33,6 +33,7 @@ class Main:
 
     def init_images(self):
         ## Gets base strings for kanji
+        self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, FILE_TITLE))
         bases = parse(self.base_file, lambda x:int(x))
         base_strings = []
         for k,v in bases.items():
@@ -73,7 +74,7 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
-                onyomi=True
+                is_onyomi=True
                 ),
             MODE_RADICAL: Stage(
                 base_keys,
@@ -81,9 +82,15 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
-                onyomi=False
+                is_onyomi=False
                 ),
             }
+
+    def render(self):
+        ## Render whole screen
+        self.screen.blit(self.background,(0,0))
+        self.window.blit(self.screen, (0,0))
+        pygame.display.flip()
 
     def main(self):
         ## Main game loop
@@ -92,6 +99,8 @@ class Main:
             e = pygame.event.get()
             
             mouseClick = get_input(e) ## Get mouse coords on click
+            self.render()
             
 
 main = Main()
+main.main()
