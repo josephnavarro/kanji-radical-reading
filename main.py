@@ -21,6 +21,7 @@ class Main:
         self.init_paths()
         self.init_images()
         self.init_data()
+        self.init_objects()
 
     def init_paths(self):
         ## Initializes file paths
@@ -51,7 +52,7 @@ class Main:
         ## Populates string-based data members
         definitions = parse(self.data_file)
         words       = [k for k in definitions]
-        onyomi      = [lambda x:split(x,DASH) for x in words]
+        onyomi      = [split(x,DASH) for x in words]
 
         self.word_parts = {words[n]:onyomi[n] for n in range(len(words))}
         self.word_defs  = definitions
