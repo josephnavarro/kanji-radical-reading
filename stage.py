@@ -58,6 +58,7 @@ class Stage:
 
         self.current = 0
         random.shuffle(self.questions)
+        self.is_onyomi = is_onyomi
 
     def next_question(self):
         ## Go to the next question
@@ -72,8 +73,10 @@ class Stage:
         
         ## Render readings to screen
         for n in range(len(self.questions[self.current].readings)):
-            self.text.render_new(self.questions[self.current].readings[n])
-            self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
+            text = self.questions[self.current].readings[n]
+            if self.is_onyomi or self.questions[self.current].answer_at != n:
+                self.text.render_new(text)
+                self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
 
         ## Render buttons on the side
         buttons = self.questions[self.current].get_button_text()

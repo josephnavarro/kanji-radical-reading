@@ -24,6 +24,7 @@ class Question:
         
         a = kana['order'][0]
         b = kana['order'][1]
+        self.answer_at = kana['order'].index('base')
         radical_order = ['かん','けん','せい']
         self.readings = kana[a], kana[b]
         self.buttons  = []

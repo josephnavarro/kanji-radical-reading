@@ -25,7 +25,7 @@ MODE_ONYOMI  = 'onyomi'  ## On'yomi given (choose radical)
 MODE_RADICAL = 'radical' ## Radical given (choose on'yomi)
 
 ## Vertical pixel offset when a button is pressed
-OFFSET_Y = 96
+OFFSET_Y = 120
 PRESS_X  = 8
 PRESS_Y  = 8
 
