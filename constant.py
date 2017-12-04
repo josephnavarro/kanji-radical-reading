@@ -13,8 +13,8 @@ BLACK = (0,0,0)
 ## GUI button placement
 KANJI_VERT = [H//3 for n in range(2)]
 KANJI_HORZ = [W*2//10, W*5//10]
-BUTTON_HORZ = [W*6//10 for n in range(3)] ## Button y-coordinates
-BUTTON_VERT = [H*(n+1)//4 for n in range(3)] ## Button x-coordinates
+BUTTON_HORZ = [W*8//12 for n in range(3)] ## Button y-coordinates
+BUTTON_VERT = [H*(n+1)//5 for n in range(3)] ## Button x-coordinates
 
 ## Finite state machine game modes
 MODE_TITLE = 'title'   ## Game title screen
