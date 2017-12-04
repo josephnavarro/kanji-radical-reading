@@ -148,7 +148,8 @@ class Main:
             e    = pygame.event.get()
             
             mouseClick = get_input(e) ## Get mouse coords on click
-            self.update(e, mouseClick, tick)            
+            self.update(e, mouseClick, tick)
+            #print(self.mode)
             self.render()
             
 
