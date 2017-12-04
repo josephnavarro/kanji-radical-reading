@@ -1,5 +1,5 @@
 #!usr/bin/env python
-import pygame
+import pygame, os
 from   pygame.locals import *
 from   constant      import *
 from   utility       import *
@@ -23,6 +23,17 @@ class Main:
         ## Initialization of general utility objects
         self.modes = {Level(), Stage(),}
         pass
+
+    def init_images(self):
+        ## Gets base strings for kanji
+        bases = parse(os.path.join(DIR_ROOT, DIR_DATA, FILE_BASE), convert_int)
+        base_strings = []
+        for k,v in bases.items():
+            for n in range(v):
+                base_strings.append('%s%d' %(k,v))
+
+        
+        self.base = get_kanji(BASE_DIR,
 
     def run_title(self):
         ## Entry into title screen loop

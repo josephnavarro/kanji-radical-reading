@@ -10,26 +10,21 @@ def _quit():
     pygame.quit()
     raise SystemExit
 
-def get_block(_dict, path, base, ext='*.png'):
-    ## Get radical masking for kanji
-    os.chdir(path)
-    for filename in glob.glob(ext):
-        if base in filename:
-            image = load_image(filename)
-            add_entry(_dict, base, image)
-
-def get_kanji(_dict, path, base, ext='*.png'):
+def get_kanji(path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
+    _dict = {}
     os.chdir(path)
     for filename in glob.glob(ext):
         if base in filename:
             image  = load_image(filename)
-            onyomi = base.split(SPACE)[1]
+            onyomi = filename.split(SPACE)[1]
             values = {
                 'image':  image,
                 'onyomi': onyomi,
                 }
             add_entry(_dict, base, values)
+
+    return _dict
 
 def get_input(events):
     ## Get mouse input
@@ -63,15 +58,14 @@ def load_image(filename):
 
 def clean_line(string):
     ## Removes in-line comments from script
-    string = string.split(IGNORE)[0]
     string = ' '.join(string.split())
     return string
 
 def extract_lines(_file):
     ## Removes comments from script
     lines  = _file.readlines()
-    lines  = [l for l in lines if not l.startswith(IGNORE)]
     output = [clean_line(l) for l in lines]
+    output = [l for l in output if len(l) != 0]
     return output
 
 def split(string, delim):
@@ -88,19 +82,23 @@ def add_entry(_dict, key, value):
         _dict[key] = value
 
 
-def make_dict(pairs, func=lambda x:x):
+def make_dict(pairs, func):
     ## Instantiates a new dictionary
     output = {}
-    for k,v in pairs:
-        add_entry(output, k, func(v))
+    for p in pairs:
+        add_entry(output, p[0], func(p[1]))
     return output
 
+def convert_int(string):
+    ## Converts a string to an int
+    return int(string)
+
     
-def parse(filename):
+def parse(filename, func=lambda x:x):
     ## Parses a file and makes a dictionary
     with open(filename, "r") as f:
         l = extract_lines(f)
-        return make_dict([split(l,COLON) for l in lines])
+        return make_dict([split(line,COLON) for line in lines], func)
         
     return {}
 
