@@ -5,19 +5,19 @@ from   constant      import *
 from   utility       import *
 
 class Text:
-    def __init__(self):
+    def __init__(self, text=''):
         ## Blittable text object
         path      = os.path.join(DIR_ROOT, DIR_FONT)
         filename  = list(glob.glob(path + '/*.ttf'))[0]
         self.font = pygame.font.Font(filename, FONTSIZE)
-        self.init_render()
+        self.init_render(text)
 
-    def init_render(self):
+    def init_render(self, text):
         ## Initialize default rendering constants
         self.antialias = True
         self.color     = BLACK
         self.text      = None
-        self.render_new('')
+        self.render_new(text)
 
     def render_new(self, string):
         ## Render a new string

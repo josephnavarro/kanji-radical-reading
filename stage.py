@@ -10,25 +10,30 @@ class Stage:
     def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, readings, is_onyomi):
         ## A single level
         self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND))
-        self.questions = []
-        tag = 'none' if is_onyomi else 'full'
+        self.questions  = []
+        
+        self.text = Text()
+        tag       = 'none' if is_onyomi else 'full'
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
-        self.text = Text()
+
+        button_up     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3a.png'))
+        button_down   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3b.png'))
+        button_images = [button_up, button_down]
         
         for word in words:
             key    = word[0]
             wordp  = word_parts[key]
-            images = []
+            kanji_images = []
             for part in wordp:
                 if part in base_keys:
-                    images.append(base_img[part][tag])
+                    kanji_images.append(base_img[part][tag])
                 else:
-                    images.append(word_img[key])
+                    kanji_images.append(word_img[key])
 
             kana = readings[key]
 
-            newQuestion = Question(images, kana, is_onyomi)
+            newQuestion = Question(button_images, kanji_images, kana, is_onyomi)
             self.questions.append(newQuestion)
 
         self.current = 0
@@ -42,6 +47,12 @@ class Stage:
         for n in range(len(self.questions[self.current].readings)):
             self.text.render_new(self.questions[self.current].readings[n])
             self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
+
+        ## Render buttons on the side
+        buttons = self.questions[self.current].get_buttons()
+        for n in range(len(buttons)):
+            self.text.render_new(buttons[n])
+            self.text.render(screen, (BUTTON_HORZ[n], BUTTON_VERT[n]))
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
