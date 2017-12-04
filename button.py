@@ -28,6 +28,10 @@ class Button:
         else:
             screen.blit(self.unpressed, (self.x,self.y))
 
+    def on_release(self, mouseClick):
+        ## Trigger on released downclick
+        clicked = bool(self.rect.collidepoint(mouseClick))
+        return self.isPressed and clicked
 
     def on_press(self, mouseClick):
         ## Trigger on downclick
@@ -40,9 +44,10 @@ class Button:
             if e.type == MOUSEBUTTONDOWN:                
                 self.on_press(mouseClick)
             elif e.type == MOUSEBUTTONUP:
-                self.isPressed = False
-                return self.function
-                
+                if self.on_release(mouseClick):
+                    return self.function
+                else:
+                    self.isPressed = False
 
         ## While not pressed, return null function
         return null_function

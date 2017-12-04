@@ -51,6 +51,10 @@ def get_input(events):
         elif e.type == MOUSEBUTTONDOWN:
             ## Get mouse pos on click
             return pygame.mouse.get_pos()
+        
+        elif e.type == MOUSEBUTTONUP:
+            ## Get mouse pos on click
+            return pygame.mouse.get_pos()
 
     ## Default return value
     return (-1,-1)
