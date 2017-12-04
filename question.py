@@ -21,15 +21,25 @@ class Question:
 
         self.buttons = [Button((BUTTON_HORZ[n], BUTTON_VERT[n]),'test',b1,b2,null_function) for n in range(3)]
 
-    def get_buttons(self):
+    def get_button_text(self):
         out_text = []
         for b in self.buttons:
             out_text.append(b.text)
         return out_text
 
+    def get_button_pressed(self):
+        return [b.isPressed for b in self.buttons]
+
     def render(self, screen):
         for n in range(len(self.images)):
             image = self.images[n]
-            screen.blit(image, image.get_rect(center=( KANJI_HORZ[n], KANJI_VERT[n])))
+            screen.blit(image, image.get_rect(center=(KANJI_HORZ[n], KANJI_VERT[n])))
+
+        for b in self.buttons:
+            b.render(screen)
+
+    def update(self, e, mouseClick):
+        for b in self.buttons:
+            b.update(e, mouseClick)
 
     

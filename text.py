@@ -5,11 +5,11 @@ from   constant      import *
 from   utility       import *
 
 class Text:
-    def __init__(self, text=''):
+    def __init__(self, text='', size=FONTSIZE):
         ## Blittable text object
         path      = os.path.join(DIR_ROOT, DIR_FONT)
         filename  = list(glob.glob(path + '/*.ttf'))[0]
-        self.font = pygame.font.Font(filename, FONTSIZE)
+        self.font = pygame.font.Font(filename, size)
         self.init_render(text)
 
     def init_render(self, text):
@@ -34,4 +34,4 @@ class Text:
 
     def render(self, screen, pos):
         ## Render self to screen at pos
-        screen.blit(self.blittable, self.blittable.get_rect(center=pos))
+        screen.blit(self.blittable, self.blittable.get_rect(midtop=pos))
