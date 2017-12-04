@@ -4,7 +4,7 @@ import os
 ## Constants
 ## Constant values used in other files
 
-TITLE = "漢字の部首で読もう" ## Window caption
+TITLE = "Reading Kanji with Radicals" ## Window caption
 SIZE  = W,H = 800,600      ## Screen size
 FPS   = 60                 ## Screen refresh rate
 FONTSIZE = 24
@@ -51,3 +51,4 @@ DASH  = '-'
 FILE  = '.'
 SPACE = '_'
 COLON = ':'
+COMMA = ','

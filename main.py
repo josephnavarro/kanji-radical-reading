@@ -79,7 +79,7 @@ class Main:
     def init_data(self):
         ## Populates string-based data members
         
-        definitions = parse(self.data_file)
+        definitions = parse(self.data_file, lambda x:split(x,COMMA)[0])
         words       = [k for k in definitions]
         onyomi      = [split(x,DASH) for x in words]
 

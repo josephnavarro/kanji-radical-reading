@@ -109,7 +109,7 @@ def convert_int(string):
     
 def parse(filename, func=lambda x:x):
     ## Parses a file and makes a dictionary
-    with open(filename, "r") as f:
+    with open(filename, "r", encoding='utf-8') as f:
         lines = extract_lines(f)
         return make_dict([split(line,COLON) for line in lines], func)
         

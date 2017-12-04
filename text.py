@@ -27,5 +27,6 @@ class Text:
             self.color,
             )
 
-    def render(self, screen):
-        pass
+    def render(self, screen, pos):
+        ## Render self to screen at pos
+        screen.blit(self.blittable, pos)
