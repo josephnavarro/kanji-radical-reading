@@ -10,7 +10,7 @@ def _quit():
     pygame.quit()
     raise SystemExit
 
-def get_kanji(path, base, ext='*.png'):
+def get_words(path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
     _dict = {}
     os.chdir(path)
@@ -18,11 +18,19 @@ def get_kanji(path, base, ext='*.png'):
         if base in filename:
             image  = load_image(filename)
             onyomi = filename.split(SPACE)[1]
-            values = {
-                'image':  image,
-                'onyomi': onyomi,
-                }
-            add_entry(_dict, base, values)
+            add_entry(_dict, base, {onyomi: image})
+
+    return _dict
+
+def get_bases(path, base, ext='*.png'):
+    ## Get kanji from images and pair them with strings
+    _dict = {}
+    os.chdir(path)
+    for filename in glob.glob(ext):
+        if base in filename:
+            image1 = load_image(filename)
+            image2 = load_image(base + '-none.png')
+            add_entry(_dict, base, {'base':image1, 'none':image2})
 
     return _dict
 

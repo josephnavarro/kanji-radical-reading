@@ -23,11 +23,7 @@ class Main:
         ## Initializes file paths
         self.base_file = os.path.join(DIR_ROOT, DIR_DATA, FILE_BASE)
         self.image_dir = os.path.join(DIR_ROOT, DIR_IMG)
-
-    def init_objects(self):
-        ## Initialization of general utility objects
-        self.modes = {Level(), Stage(),}
-        pass
+        self.base_dir  = os.path.join(DIR_ROOT, DIR_BASE)
 
     def init_images(self):
         ## Gets base strings for kanji
@@ -37,10 +33,20 @@ class Main:
             for n in range(v):
                 base_strings.append('%s%d' %(k,v))
 
-        words = []
+        self.words = {}
         for base in base_strings:
-            get_kanji(self.image_dir, base)
-        self.base = get_kanji(BASE_DIR,
+            words = get_words(self.image_dir, base)
+            self.words.update(words)
+            
+        self.bases = {}
+        for base in base_strings:
+            base = get_bases(self.base_dir, base)
+            self.bases.update(base)
+
+    def init_objects(self):
+        ## Initialization of general utility objects
+        self.modes = {Level(), Stage(),}
+        pass
 
     def run_title(self):
         ## Entry into title screen loop
