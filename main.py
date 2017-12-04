@@ -153,7 +153,7 @@ class Main:
     def update(self, e, mouseClick, tick):
         ## Update method
         self.modes[self.mode].update(e, mouseClick, tick)
-        self.mode = self.modes[MODE_TITLE].get_mode()
+        self.mode = self.modes[self.mode].get_mode()
 
     def render(self):
         ## Render whole screen

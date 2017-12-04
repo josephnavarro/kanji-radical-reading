@@ -14,14 +14,15 @@ class Stage:
         
         self.text     = Text(size=108)
         self.btn_text = Text(size=68)
+        self.back_text = Text(size=48)
         tag       = 'none' if is_onyomi else 'full'
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
 
         button_up     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3a.png'))
         button_down   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3b.png'))
-        button_images = [button_up, button_down]
-        self.button_size = button_up.get_size()
+        self.button_images = [button_up, button_down]
+        self.button_size   = button_up.get_size()
 
         kan_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'kan.png'))
         ken_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'ken.png'))
@@ -53,13 +54,26 @@ class Stage:
             random.shuffle(others)
             other_kana = others[:2]
 
-            newQuestion = Question(button_images, radical_labels, kanji_images, kana, other_kana, is_onyomi)
+            newQuestion = Question(self.button_images, radical_labels, kanji_images, kana, other_kana, is_onyomi)
             self.questions.append(newQuestion)
 
+        self.re_init(is_onyomi)
+
+    def re_init(self, is_onyomi):
+        ## Re-initialization routine
+        self.mode = MODE_ONYOMI if is_onyomi else MODE_RADICAL
         self.current = 0
         random.shuffle(self.questions)
         self.is_onyomi = is_onyomi
 
+        def return_button():
+            self.mode = MODE_TITLE
+
+        self.return_button = Button((W//16,H*15//16), "Back", *self.button_images, return_button)
+
+    def get_mode(self):
+        return self.mode
+    
     def next_question(self):
         ## Go to the next question
         self.current += 1
@@ -91,11 +105,23 @@ class Stage:
             self.btn_text.render(screen, (
                 BUTTON_HORZ[n]+w1*3//4+x,
                 BUTTON_VERT[n]+h1//8+y))
+
+        self.return_button.render(screen)
+        self.back_text.render_new(self.return_button.text)
+        w1,h1 = self.back_text.blittable.get_size()
+        w2,h2 = self.button_size
+        x,y = 0,0
+        if self.return_button.isPressed:
+            x,y = PRESS_X, PRESS_Y
+        self.back_text.render(screen, (
+            self.return_button.x+w1*3//4+x,
+            self.return_button.y+h1//8+y))
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
         if self.questions[self.current].update(e, mouseClick)():
             self.next_question()
+        self.return_button.update(e, mouseClick)
         
 
         
