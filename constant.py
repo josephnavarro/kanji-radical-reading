@@ -21,8 +21,8 @@ MODE_GAME  = 'game'    ## In-game level
 
 
 ## Different types of game modes
-STATE_ONYOMI = 'onyomi'  ## On'yomi given (choose radical)
-STATE_BUSHU  = 'bushu'   ## Radical given (choose on'yomi)
+MODE_ONYOMI  = 'onyomi'  ## On'yomi given (choose radical)
+MODE_RADICAL = 'radical' ## Radical given (choose on'yomi)
 
 
 ## Vertical pixel offset when a button is pressed
@@ -30,25 +30,26 @@ DEPRESS = 0
 
 
 ## Folder hierarchy
-DIR_ROOT = 'res'
-DIR_FONT = 'font'
-DIR_IMG  = 'img'
-DIR_SND  = 'snd'
-DIR_DATA = 'data'
+DIR_ROOT  = 'res'
+DIR_FONT  = 'font'
+DIR_IMG   = 'img'
+DIR_KANJI = 'kanji'
+DIR_SND   = 'snd'
+DIR_DATA  = 'data'
 
 
 ## Directory listings
-FONT_DIR = os.path.join(DIR_ROOT, DIR_FONT)
-IMG_DIR  = os.path.join(DIR_ROOT, DIR_IMG)
-SND_DIR  = os.path.join(DIR_ROOT, DIR_SND)
-DATA_DIR = os.path.join(DIR_ROOT, DIR_DATA)
+FONT_DIR  = os.path.join(DIR_ROOT, DIR_FONT)
+IMG_DIR   = os.path.join(DIR_ROOT, DIR_IMG)
+SND_DIR   = os.path.join(DIR_ROOT, DIR_SND)
+DATA_DIR  = os.path.join(DIR_ROOT, DIR_DATA)
+KANJI_DIR = os.path.join(DIR_ROOT, DIR_KANJI)
 
 
 ## Recognized file extensions
-F_EXT = '.lmao'  ## Level definition
-F_CFG = 'config' ## Configuration file
-
+DATA_FILETYPE = 'config'  ## Level definition
 
 ## Parser delimiters
-DASH = '-'
-
+DASH  = '-'
+FILE  = '.'
+SPACE = '_'

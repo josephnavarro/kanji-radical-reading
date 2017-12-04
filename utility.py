@@ -16,10 +16,10 @@ def get_kanji(_dict, path, base, ext='.png'):
     for filename in glob.glob(ext):
         if base in filename:
             image  = load_image(filename)
-            kana   = base.split(DASH)
+            onyomi = base.split(DASH)
             values = {
-                'image': image,
-                'kana':  kana,
+                'image':  image,
+                'onyomi': onyomi,
                 }
             add_entry(_dict, base, values)
 

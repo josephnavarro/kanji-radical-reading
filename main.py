@@ -39,8 +39,8 @@ class Main:
     def main(self):
         ## Main game loop
         while True:
-            tick = self.clock.tick(FPS) / 1000.0 ## Time increment
-            e = pygame.event.get() ## Poll for user input
+            tick = self.clock.tick(FPS) / 1000.0
+            e = pygame.event.get()
             
             mouseClick = get_input(e) ## Get mouse coords on click
             

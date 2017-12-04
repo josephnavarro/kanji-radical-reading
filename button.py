@@ -5,9 +5,8 @@ from   constant      import *
 from   utility       import *
 
 class Button:
-    def __init__(self, pos, label, pressed, unpressed, function):
+    def __init__(self, pos, pressed, unpressed, function):
         ## Pressable button in game GUI
-        self.label     = label     ## Bitmap image of text label
         self.pressed   = pressed   ## Image upon press
         self.unpressed = unpressed ## Image while not pressed
         self.function  = function  ## Function to execute when clicked
@@ -22,20 +21,12 @@ class Button:
         self.rect.topleft = self.x, self.y            ## Move rect to topleft
         self.isPressed    = False                     ## Whether it's pressed
 
-        ## Rendering offset for centering label
-        self.xOffset = self.rect.width/2  - self.label.width/2
-        self.yOffset = self.rect.height/2 - self.label.height/2
-
     def render(self, screen):
         ## Draw self to screen
         if self.isPressed:
             screen.blit(self.pressed,   (self.x, self.y + DEPRESS))
-            screen.blit(self.label,     (self.x + self.xOffset,
-                                         self.y + self.yOffset + DEPRESS))
         else:
             screen.blit(self.unpressed, (self.x, self.y))
-            screen.blit(self.label,     (self.x + self.xOffset,
-                                         self.y + self.yOffset))
 
     def on_release(self, mouseClick):
         ## Trigger on released downclick
