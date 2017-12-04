@@ -48,6 +48,13 @@ class Stage:
             self.questions.append(newQuestion)
 
         self.current = 0
+        random.shuffle(self.questions)
+
+    def next_question(self):
+        ## Go to the next question
+        self.current += 1
+        if self.current == len(self.questions):
+            self.current = 0
 
     def render(self, screen):
         ## Renders self to screen
@@ -75,6 +82,9 @@ class Stage:
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
-        self.questions[self.current].update(e, mouseClick)
+        if self.questions[self.current].update(e, mouseClick)():
+            print("A")
+            self.next_question()
+        
 
         

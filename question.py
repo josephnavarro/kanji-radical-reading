@@ -39,7 +39,7 @@ class Question:
                 fxn = incorrect
             btn1      = button_images[0]
             btn2      = button_images[1]
-            newButton = Button(pos, 'test', btn1, btn2, fxn)
+            newButton = Button(pos, text, btn1, btn2, fxn)
             self.buttons.append(newButton)
 
     def get_button_text(self):
@@ -61,6 +61,10 @@ class Question:
 
     def update(self, e, mouseClick):
         for b in self.buttons:
-            b.update(e, mouseClick)
+            result = b.update(e, mouseClick)
+            if result():
+                return correct
+
+        return incorrect
 
     
