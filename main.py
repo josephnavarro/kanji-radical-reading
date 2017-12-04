@@ -56,7 +56,7 @@ class Main:
         words       = [k for k in definitions]
         onyomi      = [split(x,DASH) for x in words]
 
-        self.word_parts = {words[n]:onyomi[n] for n in range(len(words))}
+        self.word_onyomi = {words[n]:onyomi[n] for n in range(len(words))}
         self.word_defs  = definitions
 
     def init_objects(self):
@@ -71,19 +71,22 @@ class Main:
             base_full.append(full_img)
             base_part.append(part_img)
             base_keys.append(k)
+
         
         self.modes = {
             MODE_TITLE:   None,
             MODE_ONYOMI:  Stage(
                 base_keys,
                 base_full,
-                self.word_parts,
+                self.word_img,
+                self.word_onyomi,
                 self.word_defs,
                 ),
             MODE_RADICAL: Stage(
                 base_keys,
                 base_part,
-                self.word_parts,
+                self.word_img,
+                self.word_onyomi,
                 self.word_defs,
                 ),
             }

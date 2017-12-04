@@ -65,7 +65,7 @@ def load_image(filename):
     image = pygame.image.load(filename).convert_alpha()
     return image
 
-def clean_line(string):
+def clean_line(string, joiner=' '):
     ## Removes in-line comments from script
     string = ' '.join(string.split())
     return string
