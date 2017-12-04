@@ -17,15 +17,16 @@ class Stage:
         tag = 'full' if not onyomi else 'none'
         
         words     = list(word_parts.items())
-        base_keys = list(word_img.keys())
+        base_keys = list(base_img.keys())
         for word in words:
             key = word[0]
             wordp = word_parts[key]
-            print(wordp)
             for part in wordp:
                 if part in base_keys:
                     print(base_img[part][tag])
-                    print(word_img[part])
+                    
+                else:
+                    print(word_img[key])
 
     def render(self, screen):
         ## Renders self to screen
