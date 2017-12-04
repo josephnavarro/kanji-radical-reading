@@ -79,7 +79,7 @@ class Main:
     def init_data(self):
         ## Populates string-based data members
         
-        definitions = parse(self.data_file, lambda x:split(x,COMMA)[0])
+        definitions    = parse(self.data_file, lambda x:split(x,COMMA)[0])
         words       = [k for k in definitions]
         onyomi      = [split(x,DASH) for x in words]
 
@@ -102,6 +102,23 @@ class Main:
             base_dict = get_bases(self.base_dir, base)
             self.base_img.update({base:base_dict})
 
+        pronunciations = parse(self.data_file, lambda x:[''.join(a.split()) for a in split(x,COMMA)[1].split(DASH)])
+        for k,v in pronunciations.items():
+            v = v[0]
+            s = split(k, DASH)
+            newDict = {}
+            if s[0] in base_strings:
+                newDict['base']  = v[0]
+                newDict['other'] = v[1]
+            else:
+                newDict['base']  = v[1]
+                newDict['other'] = v[0]
+            pronunciations[k] = newDict
+
+        print(pronunciations)
+
+        self.pronunciations = pronunciations
+
     def init_objects(self):
         ## Initialization of general utility objects
         base_keys = []
@@ -117,6 +134,7 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
+                self.pronunciations,
                 is_onyomi=True
                 ),
             MODE_RADICAL: Stage(
@@ -125,6 +143,7 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
+                self.pronunciations,
                 is_onyomi=False
                 ),
             }

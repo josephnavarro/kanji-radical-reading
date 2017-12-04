@@ -6,7 +6,7 @@ from   utility       import *
 from   constant      import *
 
 class Stage:
-    def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, is_onyomi):
+    def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, pronunciations, is_onyomi):
         ## A single level
         self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND))
         self.questions = []
