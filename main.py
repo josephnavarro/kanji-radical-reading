@@ -37,15 +37,15 @@ class Main:
             for n in range(v):
                 base_strings.append('%s%d' %(k,v))
 
-        self.words = {}
+        self.word_img = {}
         for base in base_strings:
             words = get_words(self.image_dir, base)
-            self.words.update(words)
+            self.word_img.update(words)
             
-        self.bases = {}
+        self.base_img = {}
         for base in base_strings:
             base = get_bases(self.base_dir, base)
-            self.bases.update(base)
+            self.base_img.update(base)
 
     def init_data(self):
         ## Populates string-based data members
@@ -53,36 +53,37 @@ class Main:
         words       = [k for k in definitions]
         onyomi      = [lambda x:split(x,DASH) for x in words]
 
+        self.word_parts = {words[n]:onyomi[n] for n in range(len(words))}
+        self.word_defs  = definitions
+
     def init_objects(self):
         ## Initialization of general utility objects
-        base_full  = []
-        base_part  = []
-        base_roots = []
+        base_full = []
+        base_part = []
+        base_imgs = []
         
-        for k,v in self.bases.items():
-            full = v['full']
-            part = v['none']
-            base_full.append(full)
-            base_part.append(part)
-            base_roots.append(k)
+        for k,v in self.base_img.items():
+            full_img = v['full']
+            part_img = v['none']
+            base_full.append(full_img)
+            base_part.append(part_img)
+            base_imgs.append(k)
         
         self.modes = {
-            MODE_TITLE:   Title(),
-            MODE_ONYOMI:  Stage(base_roots, base_full),
-            MODE_RADICAL: Stage(base_roots, base_part),
+            MODE_TITLE:   None,
+            MODE_ONYOMI:  Stage(
+                base_imgs,
+                base_full,
+                self.word_parts,
+                self.word_defs,
+                ),
+            MODE_RADICAL: Stage(
+                base_imgs,
+                base_part,
+                self.word_parts,
+                self.word_defs,
+                ),
             }
-
-    def run_title(self):
-        ## Entry into title screen loop
-        pass
-
-    def run_stage_select(self):
-        ## Entry into stage selection loop
-        pass
-
-    def run_diff_select(self):
-        ## Entry into difficulty selection loop
-        pass
 
     def main(self):
         ## Main game loop
@@ -92,3 +93,5 @@ class Main:
             
             mouseClick = get_input(e) ## Get mouse coords on click
             
+
+main = Main()

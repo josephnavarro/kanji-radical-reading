@@ -6,9 +6,10 @@ from   utility       import *
 from   constant      import *
 
 class Stage:
-    def __init__(self, root_imgs, word_imgs):
+    def __init__(self, base_imgs, word_imgs, word_parts, word_defs):
         ## A single level
-        self.questions = []
+        print(word_parts.items())
+        print(word_defs.items())
         
     def update(self, tick, mouseClick):
         ## Generic update method called by Main.main()

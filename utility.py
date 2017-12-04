@@ -13,7 +13,6 @@ def _quit():
 def get_words(path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
     _dict = {}
-    os.chdir(path)
     for filename in glob.glob(ext):
         if base in filename:
             image  = load_image(filename)
@@ -25,7 +24,6 @@ def get_words(path, base, ext='*.png'):
 def get_bases(path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
     _dict = {}
-    os.chdir(path)
     for filename in glob.glob(ext):
         if base in filename:
             image1 = load_image(filename)
@@ -105,7 +103,7 @@ def convert_int(string):
 def parse(filename, func=lambda x:x):
     ## Parses a file and makes a dictionary
     with open(filename, "r") as f:
-        l = extract_lines(f)
+        lines = extract_lines(f)
         return make_dict([split(line,COLON) for line in lines], func)
         
     return {}
