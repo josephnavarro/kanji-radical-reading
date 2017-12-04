@@ -10,7 +10,15 @@ def _quit():
     pygame.quit()
     raise SystemExit
 
-def get_kanji(_dict, path, base, ext='.png'):
+def get_block(_dict, path, base, ext='*.png'):
+    ## Get radical masking for kanji
+    os.chdir(path)
+    for filename in glob.glob(ext):
+        if base in filename:
+            image = load_image(filename)
+            add_entry(_dict, base, image)
+
+def get_kanji(_dict, path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
     os.chdir(path)
     for filename in glob.glob(ext):
