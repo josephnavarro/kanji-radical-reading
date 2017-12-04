@@ -19,6 +19,11 @@ class Main:
         self.clock  = pygame.time.Clock()           ## FPS throttler
         self.mode   = MODE_TITLE                    ## Current game state
 
+    def init_paths(self):
+        ## Initializes file paths
+        self.base_file = os.path.join(DIR_ROOT, DIR_DATA, FILE_BASE)
+        self.image_dir = os.path.join(DIR_ROOT, DIR_IMG)
+
     def init_objects(self):
         ## Initialization of general utility objects
         self.modes = {Level(), Stage(),}
@@ -26,13 +31,15 @@ class Main:
 
     def init_images(self):
         ## Gets base strings for kanji
-        bases = parse(os.path.join(DIR_ROOT, DIR_DATA, FILE_BASE), convert_int)
+        bases = parse(self.base_file, convert_int)
         base_strings = []
         for k,v in bases.items():
             for n in range(v):
                 base_strings.append('%s%d' %(k,v))
 
-        
+        words = []
+        for base in base_strings:
+            get_kanji(self.image_dir, base)
         self.base = get_kanji(BASE_DIR,
 
     def run_title(self):
