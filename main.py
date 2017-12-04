@@ -9,11 +9,31 @@ from   text          import *
 
 ## Primary entrypoint for application
 
+class Intermediate:
+    def __init__(self):
+        ## Intermediate state
+        self.mode = MODE_INTERMEDIATE
+
+    def get_mode(self):
+        return MODE_TITLE
+
+    def render(self, screen):
+        pass
+
+    def update(self, a, b, c):
+        pass
+
 class Wrapper:
     def __init__(self):
         ## Wrapper to handle finite state machine changes
         self.mode = MODE_TITLE
         self.init_images()
+
+    def re_init(self):
+        ## Re-initializes things when out of focus
+        self.onyomi_button.isPressed = False
+        self.radical_button.isPressed = False
+        self.mode = MODE_TITLE
 
     def init_images(self):
         ## Initialize images for title screen
@@ -55,6 +75,7 @@ class Wrapper:
         function2 = self.radical_button.update(e, mouseClick)
         function1()
         function2()
+        
 
 class Main:
     def __init__(self):
@@ -148,12 +169,19 @@ class Main:
                 self.readings,
                 is_onyomi=False
                 ),
+            MODE_INTERMEDIATE: Intermediate(),
+            
             }
 
     def update(self, e, mouseClick, tick):
         ## Update method
         self.modes[self.mode].update(e, mouseClick, tick)
         self.mode = self.modes[self.mode].get_mode()
+
+        if self.mode == MODE_INTERMEDIATE:
+            self.modes[MODE_TITLE].re_init()
+            self.modes[MODE_ONYOMI].re_init(True)
+            self.modes[MODE_RADICAL].re_init(False)
 
     def render(self):
         ## Render whole screen

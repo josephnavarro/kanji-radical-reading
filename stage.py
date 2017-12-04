@@ -59,17 +59,17 @@ class Stage:
 
         self.re_init(is_onyomi)
 
+    def return_main(self):
+        ## Signals to return to home screen
+        self.mode = MODE_INTERMEDIATE
+
     def re_init(self, is_onyomi):
         ## Re-initialization routine
         self.mode = MODE_ONYOMI if is_onyomi else MODE_RADICAL
         self.current = 0
         random.shuffle(self.questions)
         self.is_onyomi = is_onyomi
-
-        def return_button():
-            self.mode = MODE_TITLE
-
-        self.return_button = Button((W//16,H*15//16), "Back", *self.button_images, return_button)
+        self.return_button = Button((W//16,H*15//16), "Back", *self.button_images, self.return_main)
 
     def get_mode(self):
         return self.mode
@@ -121,7 +121,7 @@ class Stage:
         ## Generic update method called by Main.main()
         if self.questions[self.current].update(e, mouseClick)():
             self.next_question()
-        self.return_button.update(e, mouseClick)
+        self.return_button.update(e, mouseClick)()
         
 
         

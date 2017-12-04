@@ -19,6 +19,7 @@ BUTTON_VERT = [H*(n+1)//5 for n in range(3)] ## Button x-coordinates
 ## Finite state machine game modes
 MODE_TITLE = 'title'   ## Game title screen
 MODE_STAGE = 'select'  ## Game stage selection
+MODE_INTERMEDIATE = 'intermediate'
 
 ## Different types of game modes
 MODE_ONYOMI  = 'onyomi'  ## On'yomi given (choose radical)
