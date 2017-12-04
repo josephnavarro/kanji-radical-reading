@@ -110,9 +110,11 @@ class Main:
             if s[0] in base_strings:
                 newDict['base']  = v[0]
                 newDict['other'] = v[1]
+                newDict['order'] = ['base','other']
             else:
                 newDict['base']  = v[1]
                 newDict['other'] = v[0]
+                newDict['order'] = ['other','base']
             readings[k] = newDict
 
         self.readings = readings

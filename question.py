@@ -11,6 +11,12 @@ from   text          import *
 class Question:
     def __init__(self, images, kana, is_onyomi):
         self.images = images
+        self.base   = kana['base']
+        self.other  = kana['other']
+        
+        a = kana['order'][0]
+        b = kana['order'][1]
+        self.readings = kana[a], kana[b]
 
     def render(self, screen):
         for n in range(len(self.images)):

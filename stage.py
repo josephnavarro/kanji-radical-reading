@@ -26,7 +26,7 @@ class Stage:
                 else:
                     images.append(word_img[key])
 
-            kana = readings[word]
+            kana = readings[key]
 
             newQuestion = Question(images, kana, is_onyomi)
             self.questions.append(newQuestion)
@@ -38,7 +38,12 @@ class Stage:
         screen.blit(self.background, (0,0))
         self.questions[self.current].render(screen)
         
+        ## Render readings to screen
+        for n in range(len(self.questions[self.current].readings)):
+            self.text.render_new(self.questions[self.current].readings[n])
+            self.text.render(screen, (W*n*3//8,H*2//3))
+        
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
-        
         pass
+        

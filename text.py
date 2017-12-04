@@ -19,7 +19,7 @@ class Text:
         self.text      = ''
         self.render_new('')
 
-    def render_new(self,string):
+    def render_new(self, string):
         ## Render a new string
         if string != self.text:
             self.text = string
