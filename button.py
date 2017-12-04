@@ -5,7 +5,7 @@ from   constant      import *
 from   utility       import *
 
 class Button:
-    def __init__(self, pos, pressed, unpressed, function):
+    def __init__(self, pos, unpressed, pressed, function):
         ## Pressable button in game GUI
         self.pressed   = pressed   ## Image upon press
         self.unpressed = unpressed ## Image while not pressed
@@ -44,9 +44,10 @@ class Button:
             if e.type == MOUSEBUTTONDOWN:                
                 self.on_press(mouseClick)
             elif e.type == MOUSEBUTTONUP:
-                if on_release(mouseClick):
+                if self.on_release(mouseClick):
                     ## If pressed, execute this function
                     return self.function
+                self.isPressed = False
 
         ## While not pressed, return null function
         return null_function

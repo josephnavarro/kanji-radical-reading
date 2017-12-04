@@ -123,6 +123,9 @@ class Main:
             e = pygame.event.get()
             
             mouseClick = get_input(e) ## Get mouse coords on click
+            self.onyomi_button.update(e, mouseClick)
+            self.radical_button.update(e, mouseClick)
+            
             self.render()
             
 
