@@ -31,7 +31,7 @@ class Main:
 
     def init_images(self):
         ## Gets base strings for kanji
-        bases = parse(self.base_file, convert_int)
+        bases = parse(self.base_file, lambda x:int(x))
         base_strings = []
         for k,v in bases.items():
             for n in range(v):
@@ -49,7 +49,9 @@ class Main:
 
     def init_data(self):
         ## Populates string-based data members
-        parse(
+        definitions = parse(self.data_file)
+        words       = [k for k in definitions]
+        onyomi      = [lambda x:split(x,DASH) for x in words]
 
     def init_objects(self):
         ## Initialization of general utility objects
