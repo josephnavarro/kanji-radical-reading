@@ -15,7 +15,6 @@ BTNHORZ = [W/(3-n) for n in range(3)] ## Button x-coordinates
 ## Finite state machine game modes
 MODE_TITLE = 'title'   ## Game title screen
 MODE_STAGE = 'select'  ## Game stage selection
-MODE_GAME  = 'game'    ## In-game level
 
 ## Different types of game modes
 MODE_ONYOMI  = 'onyomi'  ## On'yomi given (choose radical)

@@ -3,7 +3,6 @@ import pygame, os
 from   pygame.locals import *
 from   constant      import *
 from   utility       import *
-from   level         import *
 from   stage         import *
 
 ## Primary entrypoint for application
@@ -45,8 +44,11 @@ class Main:
 
     def init_objects(self):
         ## Initialization of general utility objects
-        self.modes = {Level(), Stage(),}
-        pass
+        self.modes = {
+            MODE_TITLE:   Title(),
+            MODE_ONYOMI:  Stage(),
+            MODE_RADICAL: Stage(),
+            }
 
     def run_title(self):
         ## Entry into title screen loop

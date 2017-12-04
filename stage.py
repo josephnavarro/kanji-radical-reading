@@ -1,12 +1,14 @@
 #!usr/bin/env python
 import pygame, random
 from   pygame.locals import *
+from   question      import *
 from   constant      import *
 
 class Stage:
-    def __init__(self, questions=[]):
+    def __init__(self, words, bases):
         ## A single level
-        self.update_list(questions) ##　
+        self.problems = []
+        
 
     def update_list(self, questions):
         ## Initializes randomized pool of questions
