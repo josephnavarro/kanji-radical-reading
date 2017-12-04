@@ -21,6 +21,7 @@ class Stage:
         button_up     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3a.png'))
         button_down   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3b.png'))
         button_images = [button_up, button_down]
+        self.button_size = button_up.get_size()
         
         for word in words:
             key    = word[0]
@@ -54,10 +55,13 @@ class Stage:
         pressed = self.questions[self.current].get_button_pressed()
         for n in range(len(buttons)):
             self.btn_text.render_new(buttons[n])
+            w,h = self.button_size
             x,y = 0,0
             if pressed[n]:
                 x,y = PRESS_X, PRESS_Y
-            self.btn_text.render(screen, (BUTTON_HORZ[n]+x, BUTTON_VERT[n]+y))
+            self.btn_text.render(screen, (
+                BUTTON_HORZ[n]+w+x,
+                BUTTON_VERT[n]+h+y))
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
