@@ -8,7 +8,7 @@ from   constant      import *
 class Stage:
     def __init__(self, base_keys, word_imgs, word_parts, word_defs):
         ## A single level
-        #print(word_parts.items())
+        print(word_parts.items())
         #print(word_defs.items())
         pass
 
