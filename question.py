@@ -9,5 +9,12 @@ from   text          import *
 ## A single stage's question instance
 
 class Question:
-    def __init__(self, word, base, answer):
-        self.word = word
+    def __init__(self, images, is_onyomi):
+        self.images = images
+
+    def render(self, screen):
+        for n in range(len(self.images)):
+            image = self.images[n]
+            screen.blit(image, image.get_rect(center=( KANJI_HORZ[n], KANJI_VERT[n])))
+
+    

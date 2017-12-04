@@ -6,27 +6,25 @@ from   utility       import *
 from   constant      import *
 
 class Stage:
-    def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, onyomi):
+    def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, is_onyomi):
         ## A single level
-        '''
-        print("BASE IMG")
-        print(base_img.keys())
-        print("WORD_PARTS")
-        print(word_parts.keys())
-        print("WORD_IMG")'''
-        tag = 'full' if not onyomi else 'none'
-        
+        self.questions = []
+
+        tag = 'none' if is_onyomi else 'full'
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
+        
         for word in words:
-            key = word[0]
-            wordp = word_parts[key]
+            key    = word[0]
+            wordp  = word_parts[key]
+            images = []
             for part in wordp:
                 if part in base_keys:
-                    print(base_img[part][tag])
-                    
+                    images.append(base_img[part][tag])
                 else:
-                    print(word_img[key])
+                    images.append(word_img[key])
+
+            self.questions.append(Question(images, is_onyomi))
 
     def render(self, screen):
         ## Renders self to screen
