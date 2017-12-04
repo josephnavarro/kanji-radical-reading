@@ -9,8 +9,8 @@ SIZE  = W,H = 800,600      ## Screen size
 FPS   = 60                 ## Screen refresh rate
 
 ## GUI button placement
-KANJI_VERT = [H//2 for n in range(2)]
-KANJI_HORZ = [W*3//8, W*5//8]
+KANJI_VERT = [H//3 for n in range(2)]
+KANJI_HORZ = [W*3//9, W*6//9]
 BTNVERT = [480     for n in range(3)] ## Button y-coordinates
 BTNHORZ = [W/(3-n) for n in range(3)] ## Button x-coordinates
 
