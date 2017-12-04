@@ -17,30 +17,44 @@ def incorrect():
     return False
 
 class Question:
-    def __init__(self, button_images, kanji_images, kana, other_kana, is_onyomi):
+    def __init__(self, button_images, radical_labels, kanji_images, kana, other_kana, is_onyomi):
         self.images = kanji_images
         self.base   = kana['base']
         self.other  = kana['other']
         
         a = kana['order'][0]
         b = kana['order'][1]
+        radical_order = ['かん','けん','せい']
         self.readings = kana[a], kana[b]
         self.buttons  = []
 
-        c = [self.base, *other_kana]
-        random.shuffle(c)
+        if is_onyomi:
+            c = [self.base, *other_kana]
+            random.shuffle(c)
 
-        for n in range(3):
-            pos  = BUTTON_HORZ[n], BUTTON_VERT[n]
-            text      = c[n]
-            if text == self.base:
-                fxn = correct
-            else:
-                fxn = incorrect
-            btn1      = button_images[0]
-            btn2      = button_images[1]
-            newButton = Button(pos, text, btn1, btn2, fxn)
-            self.buttons.append(newButton)
+            for n in range(3):
+                pos  = BUTTON_HORZ[n], BUTTON_VERT[n]
+                text      = c[n]
+                if text == self.base:
+                    fxn = correct
+                else:
+                    fxn = incorrect                
+                btn1      = button_images[0]
+                btn2      = button_images[1]
+                newButton = Button(pos, text, btn1, btn2, fxn, None)
+                self.buttons.append(newButton)
+
+        else:
+            for n in range(3):
+                pos  = BUTTON_HORZ[n], BUTTON_VERT[n]
+                if radical_order[n] == self.base:
+                    fxn = correct
+                else:
+                    fxn = incorrect            
+                btn1      = button_images[0]
+                btn2      = button_images[1]
+                newButton = Button(pos, '', btn1, btn2, fxn, radical_labels[n])
+                self.buttons.append(newButton)
 
     def get_button_text(self):
         out_text = []

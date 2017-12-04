@@ -23,6 +23,12 @@ class Stage:
         button_images = [button_up, button_down]
         self.button_size = button_up.get_size()
 
+        kan_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'kan.png'))
+        ken_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'ken.png'))
+        sei_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'sei.png'))
+
+        radical_labels = [kan_img, ken_img, sei_img]
+
         others = []
         for word in words:
             r = readings[word[0]]['other']
@@ -44,7 +50,7 @@ class Stage:
             random.shuffle(others)
             other_kana = others[:2]
 
-            newQuestion = Question(button_images, kanji_images, kana, other_kana, is_onyomi)
+            newQuestion = Question(button_images, radical_labels, kanji_images, kana, other_kana, is_onyomi)
             self.questions.append(newQuestion)
 
         self.current = 0
@@ -83,7 +89,6 @@ class Stage:
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
         if self.questions[self.current].update(e, mouseClick)():
-            print("A")
             self.next_question()
         
 

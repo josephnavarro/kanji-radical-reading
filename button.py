@@ -5,8 +5,9 @@ from   constant      import *
 from   utility       import *
 
 class Button:
-    def __init__(self, pos, text, unpressed, pressed, function):
+    def __init__(self, pos, text, unpressed, pressed, function, image=None):
         ## Pressable button in game GUI
+        self.image     = None
         self.pressed   = pressed   ## Image upon press
         self.unpressed = unpressed ## Image while not pressed
         self.function  = function  ## Function to execute when clicked
@@ -28,6 +29,13 @@ class Button:
             screen.blit(self.pressed, (self.x,self.y))
         else:
             screen.blit(self.unpressed, (self.x,self.y))
+
+        if self.image:
+            if self.isPressed:
+                screen.blit(self.image, (self.x,self.y))
+            else:
+                screen.blit(self.image, (self.x+PRESS_X,
+                                         self.y+PRESS_Y))
 
     def on_release(self, mouseClick):
         ## Trigger on released downclick
