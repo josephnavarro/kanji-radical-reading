@@ -73,6 +73,7 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
+                onyomi=True
                 ),
             MODE_RADICAL: Stage(
                 base_keys,
@@ -80,6 +81,7 @@ class Main:
                 self.word_img,
                 self.word_onyomi,
                 self.word_defs,
+                onyomi=False
                 ),
             }
 
