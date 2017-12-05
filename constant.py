@@ -71,11 +71,12 @@ CHAR_SEI        = 'sei.png'
 GAME_BACKGROUND = 'game.png'
 
 ## Parser delimiters
-DASH  = '-'
-FILE  = '.'
-SPACE = '_'
-COLON = ':'
-COMMA = ','
+DASH    = '-'
+FILE    = '.'
+SPACE   = '_'
+COLON   = ':'
+COMMA   = ','
+PNGWILD = '/*.png'
 
 ## Image paths
 BGPATH = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND)
@@ -97,3 +98,7 @@ SEIPATH = os.path.join(DIR_ROOT, DIR_RADICAL, CHAR_SEI)
 START_POS = [
     
     ]
+
+## Dictionary keys
+KEY_NONE = 'none'
+KEY_FULL = 'full'

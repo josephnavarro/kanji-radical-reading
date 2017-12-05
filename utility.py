@@ -26,34 +26,34 @@ def smooth_rotate(img, angle, scale=MINISCALE):
     img  = rot(img, angle)
     return img
 
-def get_words(path, base, ext='*.png'):
+def get_words(path, b, ext=PNGWILD):
     ## Get kanji from images and pair them with strings
     _dict = {}
-    for filename in glob.glob(path + '/*.png'):
-        if base in filename:
-            image  = load_image(filename)
-            onyomi = filename.replace('\\','/').split(SPACE)[0].split('/')[-1]
-            _dict[onyomi] = image
+    for fn in glob.glob(path + ext):
+        if b in fn:
+            im = load_image(fn)
+            on = filename.replace('\\','/').split(SPACE)[0].split('/')[-1]
+            _dict[on] = im
 
     return _dict
 
-def get_bases(path, base, ext='*.png'):
+def get_bases(path, b, ext=PNGWILD):
     ## Get kanji from images and pair them with strings
     _dict = {}
     full  = None
     none  = None
-    for filename in glob.glob(path + '/*.png'):
-        if base in filename:
-            if 'none' in filename:
-                none = load_image(filename)
+    for fn in glob.glob(path + ext):
+        if b in fn:
+            if KEY_NONE in fn:
+                none = load_image(fn)
             else:
-                full = load_image(filename)
+                full = load_image(fn)
 
-    return {'none':none, 'full':full}
+    return {KEY_NONE:none, KEY_FULL:full}
 
 def get_scaling():
     ## Gets ratio between window size and interal screen
-    w1,h1 = pygame.display.get_surface().get_size()
+    w1, h1 = pygame.display.get_surface().get_size()
     return W/w1, H/h1
 
 def get_input(events):
@@ -87,11 +87,10 @@ def null_function():
     ## Do-nothing function returned by default from a button
     pass
 
-def load_image(filename):
+def load_image(fn):
     ## Load image with alpha transparency
-    image = pygame.image.load(filename).convert_alpha()
-    return image
-
+    return pygame.image.load(fn).convert_alpha()
+    
 def clean_line(string, joiner=' '):
     ## Removes in-line comments from script
     string = ' '.join(string.split())
