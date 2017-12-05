@@ -14,7 +14,7 @@ class Stage:
         
         self.text     = Text(size=108)
         self.btn_text = Text(size=68)
-        self.back_text = Text(size=48)
+        self.back_text = Text(size=36)
         tag       = 'none' if is_onyomi else 'full'
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
@@ -77,7 +77,7 @@ class Stage:
         self.current = 0
         random.shuffle(self.questions)
         self.is_onyomi = is_onyomi
-        self.return_button = Button((32,H-128), "Back", *self.button_images[:2], self.return_main)
+        self.return_button = Button((32,H-128), "BACK", *self.button_images[:2], self.return_main)
 
     def get_mode(self):
         return self.mode

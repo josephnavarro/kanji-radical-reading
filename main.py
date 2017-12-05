@@ -7,6 +7,7 @@ from   stage         import *
 from   button        import *
 from   text          import *
 
+os.environ["SDL_VIDEO_CENTERED"] = "1"
 ## Primary entrypoint for application
 
 class Intermediate:
