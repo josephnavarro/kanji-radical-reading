@@ -104,10 +104,21 @@ class Main:
         self.base_dir  = os.path.join(DIR_ROOT, DIR_BASE)
         self.kanji_dir = os.path.join(DIR_ROOT, DIR_KANJI)
 
+    def init_mouse(self):
+        ## Initializes mouse images
+        self.mouse_img = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor.png'))
+        self.mouse_click_img = [
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor-1.png')),
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor-2.png')),
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor-3.png')),
+            load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor-4.png')),
+            ]
+        self.mouse_counter = 0
+        self.mouse_animating = False
+
     def init_data(self):
         ## Populates string-based data members
-        self.mouse_img = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor.png'))
-        #self.mouse_img = pygame.transform.scale(self.mouse_img, (96,96))
+        self.init_mouse()
         
         definitions    = parse(self.data_file, lambda x:split(x,COMMA)[0])
         words       = [k for k in definitions]
@@ -197,6 +208,11 @@ class Main:
         x,y = pygame.mouse.get_pos()
         sx,sy = get_scaling()
         pos = x*sx, y*sy
+
+        if self.mouse_animating:
+            click_img  = self.mouse_click_img[int(round(self.mouse_counter))]
+            click_rect = click_img.get_rect(center=pos) 
+            self.screen.blit(click_img, click_rect)
         
         rect = self.mouse_img.get_rect(midtop=pos)
         self.screen.blit(self.mouse_img, rect)
@@ -209,8 +225,18 @@ class Main:
         while True:
             tick = self.clock.tick(FPS) / 1000.0
             e    = pygame.event.get()
+
+            if pygame.mouse.get_pressed()[0] and not self.mouse_animating:
+                self.mouse_animating = True
+                
+            if self.mouse_animating:
+                self.mouse_counter += tick * 16
+                if int(round(self.mouse_counter)) >= 3:
+                    self.mouse_animating = False
+                    self.mouse_counter = 0
             
             mouseClick = get_input(e) ## Get mouse coords on click
+            
             self.update(e, mouseClick, tick)
             #print(self.mode)
             self.render()
