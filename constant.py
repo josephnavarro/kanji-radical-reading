@@ -10,6 +10,7 @@ FPS   = 60                 ## Screen refresh rate
 FONTSIZE = 108
 BLACK = (0,0,0)
 RED   = (255,0,0)
+WHITE = (255,255,255)
 ANGLE = 2.5
 
 ## GUI button placement
