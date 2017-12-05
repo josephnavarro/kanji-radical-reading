@@ -216,5 +216,6 @@ class Main:
             self.render()
             
 
-main = Main(1.5)
-main.main()
+if __name__ == "__main__":
+    main = Main(1)
+    main.main()
