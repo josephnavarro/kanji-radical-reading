@@ -1,6 +1,7 @@
 #!usr/bin/env python
-import pygame, random
+import pygame
 from   pygame.locals import *
+from   random        import shuffle as shffl
 from   question      import *
 from   utility       import *
 from   text          import *
@@ -13,35 +14,36 @@ class Stage:
         self.init_text()
         self.questions  = []
         
-        tag       = 'none' if is_onyomi else 'full'
-        words     = list(word_parts.items())
+        tag       = KEY_NONE if is_onyomi else KEY_FULL
+        wlist     = list(word_parts.items())
         base_keys = list(base_img.keys())
 
-        radical_labels = apply_vector([
+        rlbl = apply_vector([
             load_image(KANPATH),
             load_image(KENPATH),
             load_image(SEIPATH),
             ], lambda x:sc(x,KANJISIZE))
         
         others = []
-        for word in words:
-            r = readings[word[0]]['other']
+        for w in wlist:
+            k = w[0]
+            r = readings[k][KEY_OTHER]
             if r not in others:
                 others.append(r)
                 
-        for word in words:
-            key    = word[0]
-            wordp  = word_parts[key]
-            kanji_images = []
-            for part in wordp:
-                if part in base_keys:
-                    kanji_images.append(base_img[part][tag])
+        for w in wlist:
+            k  = w[0]
+            p  = word_parts[k]
+            im = []
+            for q in p:
+                if q in base_keys:
+                    im.append(base_img[q][tag])
                 else:
-                    kanji_images.append(word_img[key])
+                    im.append(word_img[k])
 
-            kana = readings[key]
+            kana = readings[k]
 
-            random.shuffle(others)
+            shffl(others)
             other_kana = others[:2]
 
             if not is_onyomi:
@@ -49,7 +51,7 @@ class Stage:
             else:
                 bimg = self.button_images[2:]
 
-            newQuestion = Question(bimg, radical_labels, kanji_images, kana, other_kana, is_onyomi)
+            newQuestion = Question(bimg, rlbl, im, kana, other_kana, is_onyomi)
             self.questions.append(newQuestion)
 
         self.re_init(is_onyomi)
@@ -85,7 +87,7 @@ class Stage:
         self.mode = MODE_ONYOMI if is_onyomi else MODE_RADICAL
         self.current = 0
         self.strikes = 0
-        random.shuffle(self.questions)
+        shffl(self.questions)
         self.is_onyomi = is_onyomi
         self.return_button = Button((32,H-128), "BACK", *self.button_images[:2], self.return_main, angle=-12)
 

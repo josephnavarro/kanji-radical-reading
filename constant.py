@@ -101,5 +101,6 @@ START_POS = [
     ]
 
 ## Dictionary keys
-KEY_NONE = 'none'
-KEY_FULL = 'full'
+KEY_NONE  = 'none'
+KEY_FULL  = 'full'
+KEY_OTHER = 'other'
