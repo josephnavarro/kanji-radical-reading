@@ -10,6 +10,13 @@ def _quit():
     pygame.quit()
     raise SystemExit
 
+def smooth_rotate(img, angle):
+    ## Rotates with antialiasing
+    img = pygame.transform.rotate(img, angle)
+    size = img.get_size()
+    img = pygame.transform.smoothscale(img, size)
+    return img
+
 def get_words(path, base, ext='*.png'):
     ## Get kanji from images and pair them with strings
     _dict = {}

@@ -15,9 +15,9 @@ class Button:
         self.x, self.y = pos       ## Topleft blitting pos
         self.angle = angle
         if self.image:
-            self.image = pygame.transform.rotate(self.image,   self.angle)
-        self.pressed   = pygame.transform.rotate(self.pressed, self.angle)
-        self.unpressed = pygame.transform.rotate(self.unpressed, self.angle)
+            self.image = smooth_rotate(self.image,     self.angle)
+        self.pressed   = smooth_rotate(self.pressed,   self.angle)
+        self.unpressed = smooth_rotate(self.unpressed, self.angle)
         
 
         ## Initialize local member variables

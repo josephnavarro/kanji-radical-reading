@@ -28,7 +28,7 @@ class Question:
         radical_order = ['かん','けん','せい']
         self.readings = kana[a], kana[b]
         self.buttons  = []
-        angles = [-5, 5, -5]
+        angles = [-ANGLE, ANGLE, -ANGLE]
 
         if not is_onyomi:
             c = [self.base, *other_kana]
