@@ -68,8 +68,13 @@ class Question:
         out_angle = []
         for b in self.buttons:
             out_angle.append(b.angle)
-
         return out_angle
+
+    def get_button_size(self):
+        out_size = []
+        for b in self.buttons:
+            out_size.append(b.get_size())
+        return out_size
 
     def get_button_pressed(self):
         return [b.isPressed for b in self.buttons]

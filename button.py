@@ -23,6 +23,10 @@ class Button:
         ## Initialize local member variables
         self.init_constant()
 
+    def get_size(self):
+        ## Returns image size
+        return self.pressed.get_size()
+
     def init_constant(self):
         ## Initialize local member variables
         self.rect         = self.unpressed.get_rect() ## Make bounding box

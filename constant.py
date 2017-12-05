@@ -61,3 +61,9 @@ FILE  = '.'
 SPACE = '_'
 COLON = ':'
 COMMA = ','
+
+
+## Dagger animation constants
+START_POS = [
+    
+    ]

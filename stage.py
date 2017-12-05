@@ -10,6 +10,7 @@ class Stage:
     def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, readings, is_onyomi):
         ## A single level
         self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND))
+        self.dagger     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'dagger.png'))
         self.temp_surf = pygame.Surface((W*2//3,H*2//3)).convert_alpha()
         self.questions  = []
         
@@ -76,6 +77,7 @@ class Stage:
         ## Re-initialization routine
         self.mode = MODE_ONYOMI if is_onyomi else MODE_RADICAL
         self.current = 0
+        self.strikes = 0
         random.shuffle(self.questions)
         self.is_onyomi = is_onyomi
         self.return_button = Button((32,H-128), "BACK", *self.button_images[:2], self.return_main, angle=-12)
@@ -113,11 +115,12 @@ class Stage:
         buttons = self.questions[self.current].get_button_text()
         pressed = self.questions[self.current].get_button_pressed()
         angles  = self.questions[self.current].get_button_angle()
+        sizes   = self.questions[self.current].get_button_size()
         
         for n in range(len(buttons)):
             self.btn_text.render_new(buttons[n], RED)
             w1,h1 = self.btn_text.blittable.get_size()
-            w2,h2 = self.button_sizes[1 if self.is_onyomi else 0]
+            w2,h2 = sizes[n]
             x,y = 0,0
             if pressed[n]:
                 x,y = PRESS_X, PRESS_Y
