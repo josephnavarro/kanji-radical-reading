@@ -13,8 +13,8 @@ def _quit():
 def smooth_rotate(img, angle):
     ## Rotates with antialiasing
     img = pygame.transform.rotate(img, angle)
-    size = img.get_size()
-    img = pygame.transform.smoothscale(img, size)
+    x,y = img.get_size()
+    img = pygame.transform.smoothscale(img, (x-4,y-4))
     return img
 
 def get_words(path, base, ext='*.png'):

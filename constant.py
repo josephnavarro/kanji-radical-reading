@@ -10,7 +10,7 @@ FPS   = 60                 ## Screen refresh rate
 FONTSIZE = 108
 BLACK = (0,0,0)
 RED   = (255,0,0)
-ANGLE = 1.5
+ANGLE = 2.5
 
 ## GUI button placement
 KANJI_VERT = [H//4 for n in range(2)]
