@@ -191,7 +191,7 @@ class Main:
         self.modes[self.mode].render(self.screen)
 
         pos = pygame.mouse.get_pos()
-        rect = self.mouse_img.get_rect(center=pos)
+        rect = self.mouse_img.get_rect(midtop=pos)
         self.screen.blit(self.mouse_img, rect)
         self.window.blit(self.screen, (0,0))
         pygame.display.flip()
