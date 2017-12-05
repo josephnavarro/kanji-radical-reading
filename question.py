@@ -75,11 +75,13 @@ class Question:
             b.render(screen)
 
     def update(self, e, mouseClick):
+        fxn = incorrect
+        
         for b in self.buttons:
             result = b.update(e, mouseClick)
             if result():
-                return correct
+                fxn = correct
 
-        return incorrect
+        return fxn
 
     

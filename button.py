@@ -53,9 +53,8 @@ class Button:
                 self.on_press(mouseClick)
             elif e.type == MOUSEBUTTONUP:
                 if self.on_release(mouseClick):
-                    return self.function
-                else:
                     self.isPressed = False
+                    return self.function
 
         ## While not pressed, return null function
         return null_function
