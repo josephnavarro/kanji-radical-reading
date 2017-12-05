@@ -14,7 +14,7 @@ class Text:
 
     def init_render(self, text):
         ## Initialize default rendering constants
-        self.antialias = True
+        self.antialias = False
         self.color     = BLACK
         self.text      = None
         self.render_new(text)
