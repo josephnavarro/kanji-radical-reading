@@ -111,8 +111,8 @@ class Stage:
             if pressed[n]:
                 x,y = PRESS_X, PRESS_Y
             self.btn_text.render(screen, (
-                BUTTON_HORZ[n]+w2//2-w1//4+x,
-                BUTTON_VERT[n]+h2//2-h1*2//3+y))
+                BUTTON_HORZ[n] + w2//2 + x,
+                BUTTON_VERT[n] + h2//2-h1*2//3 + y))
 
         self.return_button.render(screen)
         self.back_text.render_new(self.return_button.text)
