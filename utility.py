@@ -42,8 +42,14 @@ def get_bases(path, base, ext='*.png'):
 
     return {'none':none, 'full':full}
 
+def get_scaling():
+    ## Gets ratio between window size and interal screen
+    w1,h1 = pygame.display.get_surface().get_size()
+    return W/w1, H/h1
+
 def get_input(events):
     ## Get mouse input
+    x,y = -1,-1
     for e in events:
         if e.type == QUIT:
             ## Click [x] to exit window
@@ -57,14 +63,15 @@ def get_input(events):
         
         elif e.type == MOUSEBUTTONDOWN:
             ## Get mouse pos on click
-            return pygame.mouse.get_pos()
+            x,y = pygame.mouse.get_pos()
         
         elif e.type == MOUSEBUTTONUP:
             ## Get mouse pos on click
-            return pygame.mouse.get_pos()
+            x,y = pygame.mouse.get_pos()
 
-    ## Default return value
-    return (-1,-1)
+    sx,sy = get_scaling()
+
+    return x*sx, y*sy
 
 
 def null_function():
