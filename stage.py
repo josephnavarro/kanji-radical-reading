@@ -100,7 +100,7 @@ class Stage:
                 self.text.render_new(text)
                 self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
             elif not self.is_onyomi and self.questions[self.current].answer_at == n:
-                self.text.render_new('___')
+                self.text.render_new('★')
                 self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
 
         ## Render buttons on the side
