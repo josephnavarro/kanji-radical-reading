@@ -41,18 +41,13 @@ class Stage:
                 else:
                     im.append(word_img[k])
 
-            kana = readings[k]
-
             shffl(others)
-            other_kana = others[:2]
-
+            bimg = self.button_images[2:]
             if not is_onyomi:
                 bimg = self.button_images[:2]
-            else:
-                bimg = self.button_images[2:]
-
-            newQuestion = Question(bimg, rlbl, im, kana, other_kana, is_onyomi)
-            self.questions.append(newQuestion)
+                
+            new = Question(bimg, rlbl, im, readings[k], others[:2], is_onyomi)
+            self.questions.append(new)
 
         self.re_init(is_onyomi)
 
