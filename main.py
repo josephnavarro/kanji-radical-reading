@@ -45,8 +45,8 @@ class Wrapper:
             load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2B)),
             ]     
             
-        pos1 = W//16,   H//2
-        pos2 = W*8//16, H//2
+        pos1 = W//16,   H*4//7
+        pos2 = W*8//16, H*4//7
 
         def toggle_onyomi():
             self.mode = MODE_ONYOMI

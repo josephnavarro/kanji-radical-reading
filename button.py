@@ -60,6 +60,8 @@ class Button:
                 if self.on_release(mouseClick):
                     self.isPressed = False
                     return self.function
+                else:
+                    self.isPressed = False
 
         ## While not pressed, return null function
         return null_function
