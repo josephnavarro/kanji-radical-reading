@@ -10,6 +10,7 @@ class Stage:
     def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, readings, is_onyomi):
         ## A single level
         self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND))
+        self.temp_surf = pygame.Surface((W*2//3,H*2//3)).convert_alpha()
         self.questions  = []
         
         self.text     = Text(size=108)
@@ -91,17 +92,22 @@ class Stage:
     def render(self, screen):
         ## Renders self to screen
         screen.blit(self.background, (0,0))
-        self.questions[self.current].render(screen)
+        self.temp_surf.fill((0,0,0,0))
+        self.questions[self.current].render(self.temp_surf)
+        self.questions[self.current].render_buttons(screen)
         
         ## Render readings to screen
         for n in range(len(self.questions[self.current].readings)):
             text = self.questions[self.current].readings[n]
             if self.is_onyomi or self.questions[self.current].answer_at != n:
                 self.text.render_new(text)
-                self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
+                self.text.render(self.temp_surf, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
             elif not self.is_onyomi and self.questions[self.current].answer_at == n:
                 self.text.render_new('★',WHITE)
-                self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
+                self.text.render(self.temp_surf, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
+
+        temp_img = smooth_rotate(self.temp_surf, -5)
+        screen.blit(temp_img, (-5,-5))
 
         ## Render buttons on the side
         buttons = self.questions[self.current].get_button_text()

@@ -79,6 +79,7 @@ class Question:
             image = self.images[n]
             screen.blit(image, image.get_rect(center=(KANJI_HORZ[n], KANJI_VERT[n])))
 
+    def render_buttons(self, screen):
         for b in self.buttons:
             b.render(screen)
 
