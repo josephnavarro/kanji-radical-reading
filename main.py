@@ -103,7 +103,7 @@ class Main:
     def init_data(self):
         ## Populates string-based data members
         self.mouse_img = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor.png'))
-        self.mouse_img = pygame.transform.scale(self.mouse_img, (128,128))
+        #self.mouse_img = pygame.transform.scale(self.mouse_img, (96,96))
         
         definitions    = parse(self.data_file, lambda x:split(x,COMMA)[0])
         words       = [k for k in definitions]
