@@ -17,15 +17,12 @@ class Stage:
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
 
-        radical_labels = [
+        radical_labels = apply_vector([
             load_image(KANPATH),
             load_image(KENPATH),
             load_image(SEIPATH),
-            ]
-
-        for x in range(len(radical_labels)):
-            radical_labels[x] = pygame.transform.scale(radical_labels[x], (128,128))
-
+            ], lambda x:sc(x,KANJISIZE))
+        
         others = []
         for word in words:
             r = readings[word[0]]['other']

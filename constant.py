@@ -14,7 +14,8 @@ RED       = (255,0,0)
 WHITE     = (255,255,255)
 ANGLE     = 2.5
 SCALE     = 1.5
-MINISCALE = 0.75
+MINISCALE = 0.8
+KANJISIZE = 128,128
 
 ## Font sizes
 TEXT_LG = 108
