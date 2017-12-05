@@ -79,13 +79,16 @@ class Wrapper:
         
 
 class Main:
-    def __init__(self):
+    def __init__(self, scale=SCALE):
         ## Constructor
         pygame.init()
+        
+        self.scale = scale
+        self.size  = int(round(W*scale)), int(round(H*scale))
 
         pygame.display.set_caption(TITLE)           ## Set window caption
         pygame.mouse.set_visible(False)
-        self.window = pygame.display.set_mode(SIZE) ## Create window
+        self.window = pygame.display.set_mode(self.size) ## Create window
         self.screen = pygame.Surface(SIZE)          ## Create blitting surface
         self.clock  = pygame.time.Clock()           ## FPS throttler
         self.mode   = MODE_TITLE                    ## Current game state
@@ -191,10 +194,14 @@ class Main:
         ## Render whole screen
         self.modes[self.mode].render(self.screen)
 
-        pos = pygame.mouse.get_pos()
+        x,y = pygame.mouse.get_pos()
+        sx,sy = get_scaling()
+        pos = x*sx, y*sy
+        
         rect = self.mouse_img.get_rect(midtop=pos)
         self.screen.blit(self.mouse_img, rect)
-        self.window.blit(self.screen, (0,0))
+        pygame.transform.scale(self.screen, self.size, self.window) 
+        #self.window.blit(self.screen, (0,0))
         pygame.display.flip()
 
     def main(self):
@@ -209,5 +216,5 @@ class Main:
             self.render()
             
 
-main = Main()
+main = Main(1.5)
 main.main()

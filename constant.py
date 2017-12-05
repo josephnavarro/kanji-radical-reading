@@ -12,6 +12,7 @@ BLACK = (0,0,0)
 RED   = (255,0,0)
 WHITE = (255,255,255)
 ANGLE = 2.5
+SCALE = 1
 
 ## GUI button placement
 KANJI_VERT = [H//4 for n in range(2)]
