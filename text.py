@@ -19,14 +19,15 @@ class Text:
         self.text      = None
         self.render_new(text)
 
-    def render_new(self, string):
+    def render_new(self, string, color=None):
         ## Render a new string
         if string != self.text:
+            color = color if color else self.color
             self.text = string
             self.blittable = self.font.render(
                 self.text,
                 self.antialias,
-                self.color,
+                color,
                 )
 
     def get_rect(self, **kwargs):

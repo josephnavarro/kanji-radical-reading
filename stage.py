@@ -97,10 +97,10 @@ class Stage:
         for n in range(len(self.questions[self.current].readings)):
             text = self.questions[self.current].readings[n]
             if self.is_onyomi or self.questions[self.current].answer_at != n:
-                self.text.render_new(text)
+                self.text.render_new(text,RED)
                 self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
             elif not self.is_onyomi and self.questions[self.current].answer_at == n:
-                self.text.render_new('★')
+                self.text.render_new('★',RED)
                 self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
 
         ## Render buttons on the side
