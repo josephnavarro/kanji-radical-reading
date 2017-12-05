@@ -44,7 +44,7 @@ class Wrapper:
             load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2A)),
             load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2B)),
             ]     
-            
+        
         pos1 = W//16,   H*4//7
         pos2 = W*8//16, H*4//7
 
@@ -83,6 +83,7 @@ class Main:
         pygame.init()
 
         pygame.display.set_caption(TITLE)           ## Set window caption
+        pygame.mouse.set_visible(False)
         self.window = pygame.display.set_mode(SIZE) ## Create window
         self.screen = pygame.Surface(SIZE)          ## Create blitting surface
         self.clock  = pygame.time.Clock()           ## FPS throttler
@@ -101,6 +102,8 @@ class Main:
 
     def init_data(self):
         ## Populates string-based data members
+        self.mouse_img = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'cursor.png'))
+        self.mouse_img = pygame.transform.scale(self.mouse_img, (128,128))
         
         definitions    = parse(self.data_file, lambda x:split(x,COMMA)[0])
         words       = [k for k in definitions]
@@ -185,8 +188,12 @@ class Main:
 
     def render(self):
         ## Render whole screen
-        self.window.blit(self.screen, (0,0))
         self.modes[self.mode].render(self.screen)
+
+        pos = pygame.mouse.get_pos()
+        rect = self.mouse_img.get_rect(center=pos)
+        self.screen.blit(self.mouse_img, rect)
+        self.window.blit(self.screen, (0,0))
         pygame.display.flip()
 
     def main(self):
