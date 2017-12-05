@@ -14,7 +14,7 @@ def smooth_rotate(img, angle):
     ## Rotates with antialiasing
     x,y = img.get_size()
     x,y = int(round(x*0.875)), int(round(y*0.875))
-    img = pygame.transform.smoothscale(img, (x,y))
+    img = pygame.transform.scale(img, (x,y))
     img = pygame.transform.rotate(img, angle)
     
     return img

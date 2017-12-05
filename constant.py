@@ -4,7 +4,7 @@ import os
 ## Constants
 ## Constant values used in other files
 
-TITLE = "Reading Kanji with Radicals" ## Window caption
+TITLE = "Read Kanji with Radicals" ## Window caption
 SIZE  = W,H = 800,600      ## Screen size
 FPS   = 60                 ## Screen refresh rate
 FONTSIZE = 108
@@ -12,7 +12,7 @@ BLACK = (0,0,0)
 RED   = (255,0,0)
 WHITE = (255,255,255)
 ANGLE = 2.5
-SCALE = 1
+SCALE = 1.5
 
 ## GUI button placement
 KANJI_VERT = [H//4 for n in range(2)]
