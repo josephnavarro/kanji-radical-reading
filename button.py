@@ -31,10 +31,15 @@ class Button:
             screen.blit(self.unpressed, (self.x,self.y))
 
         if self.image:
+            w1,h1 = self.pressed.get_size()
             if self.isPressed:
-                screen.blit(self.image, (self.x+PRESS_X,self.y+PRESS_Y))
+                screen.blit(self.image, (
+                    self.x + w1//8 + PRESS_X,
+                    self.y + h1//16 + PRESS_Y))
             else:
-                screen.blit(self.image, (self.x,self.y))
+                screen.blit(self.image, (
+                    self.x + w1//8,
+                    self.y + h1//16))
 
     def on_release(self, mouseClick):
         ## Trigger on released downclick
