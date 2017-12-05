@@ -45,8 +45,8 @@ class Wrapper:
             load_image(os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG2B)),
             ]     
         
-        pos1 = W//16,   H*4//7
-        pos2 = W*8//16, H*4//7
+        pos1 = MAIN_BUTTON_HORZ[0], MAIN_BUTTON_VERT[0]
+        pos2 = MAIN_BUTTON_HORZ[1], MAIN_BUTTON_VERT[1]
 
         def toggle_onyomi():
             self.mode = MODE_ONYOMI
