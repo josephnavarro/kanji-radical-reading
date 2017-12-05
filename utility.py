@@ -28,18 +28,17 @@ def smooth_rotate(img, angle, scale=MINISCALE):
 
 def get_words(path, b, ext=PNGWILD):
     ## Get kanji from images and pair them with strings
-    _dict = {}
+    d = {}
     for fn in glob.glob(path + ext):
         if b in fn:
             im = load_image(fn)
-            on = filename.replace('\\','/').split(SPACE)[0].split('/')[-1]
-            _dict[on] = im
+            on = fn.replace('\\','/').split(SPACE)[0].split('/')[-1]
+            d[on] = im
 
-    return _dict
+    return d
 
 def get_bases(path, b, ext=PNGWILD):
     ## Get kanji from images and pair them with strings
-    _dict = {}
     full  = None
     none  = None
     for fn in glob.glob(path + ext):
@@ -91,50 +90,49 @@ def load_image(fn):
     ## Load image with alpha transparency
     return pygame.image.load(fn).convert_alpha()
     
-def clean_line(string, joiner=' '):
+def clean_line(s, j=' '):
     ## Removes in-line comments from script
-    string = ' '.join(string.split())
-    return string
+    return j.join(s.split())
 
-def extract_lines(_file):
+def extract_lines(f):
     ## Removes comments from script
-    lines  = _file.readlines()
-    output = [clean_line(l) for l in lines]
-    output = [l for l in output if len(l) != 0]
-    return output
+    l = f.readlines()
+    o = apply_vector(l, clean_line)
+    return [p for p in o if len(p) != 0]
 
-def split(string, delim):
+def split(s, d):
     ## Splits a string according to a delimiter
-    return string.split(delim)
+    return s.split(d)
 
 
-def add_entry(_dict, key, value):
+def add_entry(d, k, v):
     ## Adds a value to a dictionary
-    if key in _dict.keys():
-        _dict[key] = list(_dict[key])
-        _dict[key].append(value)      
+    if k in d.keys():
+        d[k] = list(d[k])
+        d[k].append(v)      
     else:
-        _dict[key] = [value]
+        d[k] = [v]
 
 
-def make_dict(pairs, func):
+def make_dict(p, fxn):
     ## Instantiates a new dictionary
-    output = {}
-    for p in pairs:
-        add_entry(output, p[0], func(p[1]))
-    return output
+    o = {}
+    for q in p:
+        add_entry(o, q[0], fxn(q[1]))
+    return o
 
-def convert_int(string):
+def convert_int(s):
     ## Converts a string to an int
-    return int(string)
+    return int(s)
     
     
-def parse(filename, func=lambda x:x):
+def parse(fn, fxn=lambda x:x):
     ## Parses a file and makes a dictionary
-    with open(filename, "r", encoding='utf-8') as f:
-        lines = extract_lines(f)
-        return make_dict([split(line,COLON) for line in lines], func)
+    d = {}
+    with open(fn, "r", encoding='utf-8') as f:
+        l = extract_lines(f)
+        d = make_dict([split(m,COLON) for m in l], fxn)
         
-    return {}
+    return d
 
 
