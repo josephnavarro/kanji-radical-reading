@@ -97,7 +97,7 @@ class Stage:
         for n in range(len(self.questions[self.current].readings)):
             text = self.questions[self.current].readings[n]
             if self.is_onyomi or self.questions[self.current].answer_at != n:
-                self.text.render_new(text,RED)
+                self.text.render_new(text)
                 self.text.render(screen, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
             elif not self.is_onyomi and self.questions[self.current].answer_at == n:
                 self.text.render_new('★',RED)
@@ -107,7 +107,7 @@ class Stage:
         buttons = self.questions[self.current].get_button_text()
         pressed = self.questions[self.current].get_button_pressed()
         for n in range(len(buttons)):
-            self.btn_text.render_new(buttons[n])
+            self.btn_text.render_new(buttons[n], RED)
             w1,h1 = self.btn_text.blittable.get_size()
             w2,h2 = self.button_sizes[1 if self.is_onyomi else 0]
             x,y = 0,0
