@@ -12,7 +12,7 @@ FONTSIZE  = 108
 BLACK     = (0,0,0)
 RED       = (255,0,0)
 WHITE     = (255,255,255)
-ANGLE     = 2.5
+ANGLE     = 3.75
 SCALE     = 1.5
 MINISCALE = 0.8
 KANJISIZE = 128,128
@@ -27,7 +27,7 @@ KANJI_VERT       = [H//4 for n in range(2)]
 KANJI_HORZ       = [32+W*3//18, 32+W*8//18]
 MAIN_BUTTON_HORZ = [32, W//2 + 64]
 MAIN_BUTTON_VERT = [H//2 + 64 for n in range(2)]
-BUTTON_HORZ      = [W*8//12 for n in range(3)]      ## Button y-coordinates
+BUTTON_HORZ      = [480 for n in range(3)]      ## Button y-coordinates
 BUTTON_VERT      = [32 + 176 * n for n in range(3)] ## Button x-coordinates
 
 ## Finite state machine game modes

@@ -8,45 +8,39 @@ from   text          import *
 from   constant      import *
 
 class Stage:
-    def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, readings, is_onyomi):
+    def __init__(self, bkey, base_img, word_img, word_parts, word_defs, kana, is_onyomi):
         ## A single level
         self.init_images()
         self.init_text()
         self.questions  = []
         
-        tag       = KEY_NONE if is_onyomi else KEY_FULL
-        wlist     = list(word_parts.items())
-        base_keys = list(base_img.keys())
-
-        rlbl = apply_vector([
-            load_image(KANPATH),
-            load_image(KENPATH),
-            load_image(SEIPATH),
-            ], lambda x:sc(x,KANJISIZE))
+        tag   = KEY_NONE if is_onyomi else KEY_FULL
+        wlist = list(word_parts.items())
+        bkey  = list(base_img.keys())
         
         others = []
         for w in wlist:
             k = w[0]
-            r = readings[k][KEY_OTHER]
+            r = kana[k][KEY_OTHER]
             if r not in others:
                 others.append(r)
                 
         for w in wlist:
-            k  = w[0]
-            p  = word_parts[k]
-            im = []
+            k   = w[0]
+            p   = word_parts[k]
+            ims = []
             for q in p:
-                if q in base_keys:
-                    im.append(base_img[q][tag])
+                if q in bkey:
+                    ims.append(base_img[q][tag])
                 else:
-                    im.append(word_img[k])
+                    ims.append(word_img[k])
 
             shffl(others)
-            bimg = self.button_images[2:]
+            b = self.button_images[2:]
             if not is_onyomi:
                 bimg = self.button_images[:2]
                 
-            new = Question(bimg, rlbl, im, readings[k], others[:2], is_onyomi)
+            new = Question(b, self.labels, ims, kana[k], others[:2], word_defs[k], is_onyomi)
             self.questions.append(new)
 
         self.re_init(is_onyomi)
@@ -69,6 +63,12 @@ class Stage:
         
         self.button_images = [b1, b2, b3, b4]
         self.button_sizes  = [b1.get_size(), b3.get_size()]
+
+        self.labels = apply_vector([
+            load_image(KANPATH),
+            load_image(KENPATH),
+            load_image(SEIPATH),
+            ], lambda x:sc(x,KANJISIZE))
         
 
     def init_text(self):
@@ -76,6 +76,7 @@ class Stage:
         self.text      = Text(size=TEXT_LG)
         self.btn_text  = Text(size=TEXT_MD)
         self.back_text = Text(size=TEXT_SM)
+        self.def_text  = Text(size=TEXT_SM)
 
     def re_init(self, is_onyomi):
         ## Re-initialization routine
@@ -116,10 +117,11 @@ class Stage:
         screen.blit(temp_img, (-5,-5))
 
         ## Render buttons on the side
-        buttons = self.questions[self.current].get_button_text()
-        pressed = self.questions[self.current].get_button_pressed()
-        angles  = self.questions[self.current].get_button_angle()
-        sizes   = self.questions[self.current].get_button_size()
+        buttons    = self.questions[self.current].get_button_text()
+        pressed    = self.questions[self.current].get_button_pressed()
+        angles     = self.questions[self.current].get_button_angle()
+        sizes      = self.questions[self.current].get_button_size()
+        definition = self.questions[self.current].get_definition()
         
         for n in range(len(buttons)):
             self.btn_text.render_new(buttons[n], RED)
@@ -144,6 +146,9 @@ class Stage:
             self.return_button.x+w2//2-w1//4+x,
             self.return_button.y+h2//2-h1*2//3+y),
                               angle = -12)
+
+        self.def_text.render_new(definition, color=BLACK)
+        self.def_text.render(screen, (200,340), angle=-12)
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
