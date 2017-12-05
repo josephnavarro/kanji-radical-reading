@@ -33,6 +33,7 @@ class Text:
     def get_rect(self, **kwargs):
         return self.blittable.get_rect(**kwargs)
 
-    def render(self, screen, pos):
+    def render(self, screen, pos, angle=0):
         ## Render self to screen at pos
-        screen.blit(self.blittable, self.blittable.get_rect(midtop=pos))
+        blits = pygame.transform.rotate(self.blittable, angle)
+        screen.blit(blits, blits.get_rect(midtop=pos))

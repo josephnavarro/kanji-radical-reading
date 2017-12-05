@@ -28,6 +28,7 @@ class Question:
         radical_order = ['かん','けん','せい']
         self.readings = kana[a], kana[b]
         self.buttons  = []
+        angles = [-5, 5, -5]
 
         if not is_onyomi:
             c = [self.base, *other_kana]
@@ -42,7 +43,7 @@ class Question:
                     fxn = incorrect                
                 btn1      = button_images[0]
                 btn2      = button_images[1]
-                newButton = Button(pos, text, btn1, btn2, fxn, None)
+                newButton = Button(pos, text, btn1, btn2, fxn, None, angle=angles[n])
                 self.buttons.append(newButton)
 
         else:
@@ -54,7 +55,7 @@ class Question:
                     fxn = incorrect            
                 btn1      = button_images[0]
                 btn2      = button_images[1]
-                newButton = Button(pos, '', btn1, btn2, fxn, radical_labels[n])
+                newButton = Button(pos, '', btn1, btn2, fxn, radical_labels[n], angle=angles[n])
                 self.buttons.append(newButton)
 
     def get_button_text(self):
@@ -62,6 +63,13 @@ class Question:
         for b in self.buttons:
             out_text.append(b.text)
         return out_text
+
+    def get_button_angle(self):
+        out_angle = []
+        for b in self.buttons:
+            out_angle.append(b.angle)
+
+        return out_angle
 
     def get_button_pressed(self):
         return [b.isPressed for b in self.buttons]

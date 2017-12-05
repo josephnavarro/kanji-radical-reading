@@ -1,11 +1,11 @@
 #!usr/bin/env python
-import pygame
+import pygame, random
 from   pygame.locals import *
 from   constant      import *
 from   utility       import *
 
 class Button:
-    def __init__(self, pos, text, unpressed, pressed, function, image=None):
+    def __init__(self, pos, text, unpressed, pressed, function, image=None, angle=0):
         ## Pressable button in game GUI
         self.image     = image
         self.pressed   = pressed   ## Image upon press
@@ -13,6 +13,12 @@ class Button:
         self.function  = function  ## Function to execute when clicked
         self.text      = text      ## Blittable text label
         self.x, self.y = pos       ## Topleft blitting pos
+        self.angle = angle
+        if self.image:
+            self.image = pygame.transform.rotate(self.image,   self.angle)
+        self.pressed   = pygame.transform.rotate(self.pressed, self.angle)
+        self.unpressed = pygame.transform.rotate(self.unpressed, self.angle)
+        
 
         ## Initialize local member variables
         self.init_constant()

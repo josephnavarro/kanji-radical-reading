@@ -77,11 +77,11 @@ class Stage:
         self.current = 0
         random.shuffle(self.questions)
         self.is_onyomi = is_onyomi
-        self.return_button = Button((32,H-128), "BACK", *self.button_images[:2], self.return_main)
+        self.return_button = Button((32,H-128), "BACK", *self.button_images[:2], self.return_main, angle=-12)
 
     def get_mode(self):
         return self.mode
-    
+          
     def next_question(self):
         ## Go to the next question
         self.current += 1
@@ -106,6 +106,8 @@ class Stage:
         ## Render buttons on the side
         buttons = self.questions[self.current].get_button_text()
         pressed = self.questions[self.current].get_button_pressed()
+        angles  = self.questions[self.current].get_button_angle()
+        
         for n in range(len(buttons)):
             self.btn_text.render_new(buttons[n], RED)
             w1,h1 = self.btn_text.blittable.get_size()
@@ -115,7 +117,8 @@ class Stage:
                 x,y = PRESS_X, PRESS_Y
             self.btn_text.render(screen, (
                 BUTTON_HORZ[n] + w2//2 + x,
-                BUTTON_VERT[n] + h2//2-h1*2//3 + y))
+                BUTTON_VERT[n] + h2//2-h1*2//3 + y),
+                                 angle = angles[n])
 
         self.return_button.render(screen)
         self.back_text.render_new(self.return_button.text)
