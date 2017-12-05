@@ -1,7 +1,9 @@
 #!usr/bin/env python
 import pygame, glob, os
-from   pygame.locals import *
-from   constant      import *
+from   pygame.locals    import *
+from   pygame.transform import scale  as sc
+from   pygame.transform import rotate as rot
+from   constant         import *
 
 ## Functions used universally
 
@@ -10,13 +12,18 @@ def _quit():
     pygame.quit()
     raise SystemExit
 
-def smooth_rotate(img, angle):
-    ## Rotates with antialiasing
-    x,y = img.get_size()
-    x,y = int(round(x*0.875)), int(round(y*0.875))
-    img = pygame.transform.scale(img, (x,y))
-    img = pygame.transform.rotate(img, angle)
-    
+def apply_vector(vector, *fxns):
+    ## Applies a function over all elements
+    for fxn in fxns:
+        vector = [fxn(v) for v in vector[:]]
+
+    return vector
+
+def smooth_rotate(img, angle, scale=MINISCALE):
+    ## Rotates and scales
+    size = apply_vector(img.get_size(), lambda x:x*scale, round, int)
+    img  = sc(img, size)
+    img  = rot(img, angle)
     return img
 
 def get_words(path, base, ext='*.png'):
@@ -121,7 +128,7 @@ def make_dict(pairs, func):
 def convert_int(string):
     ## Converts a string to an int
     return int(string)
-
+    
     
 def parse(filename, func=lambda x:x):
     ## Parses a file and makes a dictionary

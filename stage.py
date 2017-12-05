@@ -9,34 +9,22 @@ from   constant      import *
 class Stage:
     def __init__(self, base_keys, base_img, word_img, word_parts, word_defs, readings, is_onyomi):
         ## A single level
-        self.background = load_image(os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND))
-        self.dagger     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'dagger.png'))
-        self.temp_surf = pygame.Surface((W*2//3,H*2//3)).convert_alpha()
+        self.init_images()
+        self.init_text()
         self.questions  = []
         
-        self.text     = Text(size=108)
-        self.btn_text = Text(size=68)
-        self.back_text = Text(size=36)
         tag       = 'none' if is_onyomi else 'full'
         words     = list(word_parts.items())
         base_keys = list(base_img.keys())
 
-        button_up1     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3a.png'))
-        button_down1   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button3b.png'))
-        button_up2     = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button4a.png'))
-        button_down2   = load_image(os.path.join(DIR_ROOT, DIR_IMG, 'button4b.png'))
-        
-        self.button_images = [button_up1, button_down1, button_up2, button_down2]
-        self.button_sizes  = [button_up1.get_size(), button_up2.get_size()]
-
-        kan_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'kan.png'))
-        ken_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'ken.png'))
-        sei_img = load_image(os.path.join(DIR_ROOT, DIR_RADICAL, 'sei.png'))
-
-        radical_labels = [kan_img, ken_img, sei_img]
+        radical_labels = [
+            load_image(KANPATH),
+            load_image(KENPATH),
+            load_image(SEIPATH),
+            ]
 
         for x in range(len(radical_labels)):
-            radical_labels[x] = pygame.transform.smoothscale(radical_labels[x], (128,128))
+            radical_labels[x] = pygame.transform.scale(radical_labels[x], (128,128))
 
         others = []
         for word in words:
@@ -72,6 +60,28 @@ class Stage:
     def return_main(self):
         ## Signals to return to home screen
         self.mode = MODE_INTERMEDIATE
+
+    def init_images(self):
+        ## Initializes images
+        self.background = load_image(BGPATH)
+        self.dagger     = load_image(DGPATH)
+        self.temp_surf  = pygame.Surface(SMALL).convert_alpha()
+
+        ## Loads button images
+        b1 = load_image(BTNPATH1[0])
+        b2 = load_image(BTNPATH1[1])
+        b3 = load_image(BTNPATH2[0])
+        b4 = load_image(BTNPATH2[1])
+        
+        self.button_images = [b1, b2, b3, b4]
+        self.button_sizes  = [b1.get_size(), b3.get_size()]
+        
+
+    def init_text(self):
+        ## Initializes text
+        self.text      = Text(size=TEXT_LG)
+        self.btn_text  = Text(size=TEXT_MD)
+        self.back_text = Text(size=TEXT_SM)
 
     def re_init(self, is_onyomi):
         ## Re-initialization routine
