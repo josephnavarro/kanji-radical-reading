@@ -127,15 +127,16 @@ class Stage:
                                  angle = angles[n])
 
         self.return_button.render(screen)
-        self.back_text.render_new(self.return_button.text)
         w1,h1 = self.back_text.blittable.get_size()
         w2,h2 = self.button_sizes[0]
         x,y = 0,0
         if self.return_button.isPressed:
             x,y = PRESS_X, PRESS_Y
+        self.back_text.render_new(self.return_button.text, color=(255,0,0))
         self.back_text.render(screen, (
             self.return_button.x+w2//2-w1//4+x,
-            self.return_button.y+h2//2-h1*2//3+y))
+            self.return_button.y+h2//2-h1*2//3+y),
+                              angle = -12)
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
