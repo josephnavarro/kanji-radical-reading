@@ -11,7 +11,7 @@ from   constant      import *
 class Stage:
     def __init__(self, bkey, base_img, word_img, word_parts, word_defs, kana, is_onyomi):
         ## A single level
-        self.init_images()
+        self.init_images(is_onyomi)
         self.init_text()
         self.questions  = []
         
@@ -50,9 +50,9 @@ class Stage:
         ## Signals to return to home screen
         self.mode = MODE_INTERMEDIATE
 
-    def init_images(self):
+    def init_images(self, is_onyomi):
         ## Initializes images
-        self.background = load_image(BGPATH)
+        self.background = load_image(BGPATH1 if is_onyomi else BGPATH2)
         self.dagger     = load_image(DGPATH)
         self.temp_surf  = pygame.Surface(SMALL).convert_alpha()
 

@@ -73,7 +73,8 @@ DAGGER_IMG      = 'dagger.png'
 CHAR_KAN        = 'kan.png'
 CHAR_KEN        = 'ken.png'
 CHAR_SEI        = 'sei.png'
-GAME_BACKGROUND = 'game.png'
+GAME_BACKGROUND1 = 'game1.png'
+GAME_BACKGROUND2 = 'game2.png'
 
 ## Parser delimiters
 DASH    = '-'
@@ -84,7 +85,8 @@ COMMA   = ','
 PNGWILD = '/*.png'
 
 ## Image paths
-BGPATH = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND)
+BGPATH1 = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND1)
+BGPATH2 = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND2)
 DGPATH = os.path.join(DIR_ROOT, DIR_IMG, DAGGER_IMG)
 BTNPATH1 = [
     os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG3A),
