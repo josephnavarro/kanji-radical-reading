@@ -110,8 +110,9 @@ class Main:
     def init_sound(self):
         ## Initializes BGM, among other things
         self.click_sound = pygame.mixer.Sound(SFX1_PATH)
+        self.click_sound.set_volume(0.2)
         pygame.mixer.music.load(BGM_PATH)
-        pygame.mixer.music.set_volume(0.35)
+        pygame.mixer.music.set_volume(0.25)
         pygame.mixer.music.play()
 
     def init_mouse(self):
@@ -239,10 +240,10 @@ class Main:
             for ev in e:
                 if ev.type == pygame.MOUSEBUTTONDOWN:
                     self.click_sound.play()
+                    self.mouse_animating = True
+                elif ev.type == pygame.MOUSEBUTTONUP:
+                    self.mouse_animating = False
 
-            if pygame.mouse.get_pressed()[0] and not self.mouse_animating:
-                self.mouse_animating = True
-                
             if self.mouse_animating:
                 self.mouse_counter += tick * 16
                 if int(round(self.mouse_counter)) >= 3:
