@@ -8,6 +8,7 @@ from   button        import *
 from   text          import *
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
+pygame.mixer.pre_init(44100, -16, 2, 4096)
 ## Primary entrypoint for application
 
 class Intermediate:
@@ -95,6 +96,7 @@ class Main:
         self.mode   = MODE_TITLE                    ## Current game state
 
         self.init_paths()
+        self.init_sound()
         self.init_data()
         self.init_objects()
 
@@ -104,6 +106,12 @@ class Main:
         self.image_dir = os.path.join(DIR_ROOT, DIR_IMG)
         self.base_dir  = os.path.join(DIR_ROOT, DIR_BASE)
         self.kanji_dir = os.path.join(DIR_ROOT, DIR_KANJI)
+
+    def init_sound(self):
+        ## Initializes BGM, among other things
+        pygame.mixer.music.load(BGM_PATH)
+        pygame.mixer.music.set_volume(0.35)
+        pygame.mixer.music.play()
 
     def init_mouse(self):
         ## Initializes mouse images

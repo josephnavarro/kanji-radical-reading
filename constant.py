@@ -56,6 +56,7 @@ DIR_KANJI   = 'kanji'
 DIR_RADICAL = 'radical'
 DIR_BASE    = 'base'
 DIR_DATA    = 'data'
+DIR_SOUND   = 'snd'
 
 ## Files
 FILE_BASE       = 'base.config'
@@ -75,7 +76,8 @@ CHAR_KEN        = 'ken.png'
 CHAR_SEI        = 'sei.png'
 GAME_BACKGROUND1 = 'game1.png'
 GAME_BACKGROUND2 = 'game2.png'
-ICONFILE        = 'icon.png'
+ICONFILE         = 'icon.png'
+BGM_FILE         = 'bgm.ogg'
 
 ## Parser delimiters
 DASH    = '-'
@@ -86,10 +88,11 @@ COMMA   = ','
 PNGWILD = '/*.png'
 
 ## Image paths
-BGPATH1  = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND1)
-BGPATH2  = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND2)
-ICONPATH = os.path.join(DIR_ROOT, DIR_IMG, ICONFILE)
-DGPATH   = os.path.join(DIR_ROOT, DIR_IMG, DAGGER_IMG)
+BGPATH1  = os.path.join(DIR_ROOT, DIR_IMG,   GAME_BACKGROUND1)
+BGPATH2  = os.path.join(DIR_ROOT, DIR_IMG,   GAME_BACKGROUND2)
+BGM_PATH = os.path.join(DIR_ROOT, DIR_SOUND, BGM_FILE)
+ICONPATH = os.path.join(DIR_ROOT, DIR_IMG,   ICONFILE)
+DGPATH   = os.path.join(DIR_ROOT, DIR_IMG,   DAGGER_IMG)
 BTNPATH1 = [
     os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG3A),
     os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG3B),
