@@ -36,4 +36,7 @@ class Text:
     def render(self, screen, pos, angle=0):
         ## Render self to screen at pos
         blits = pygame.transform.rotate(self.blittable, angle)
-        screen.blit(blits, blits.get_rect(midtop=pos))
+        a,b = pos
+        for x in range(-1,2):
+            for y in range(-1,2):
+                screen.blit(blits, blits.get_rect(midtop=(a+x,y+b)))
