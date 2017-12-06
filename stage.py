@@ -151,11 +151,12 @@ class Stage:
         for n in range(len(defs)):
             self.def_text.render_new(defs[n], color=BLACK)
 
-            vsin = sin(DEF_ANGLE) * TEXT_DF*2/3
-            vcos = cos(DEF_ANGLE) * TEXT_DF*2/3
-            vdif = vsin + vcos
+            vsin = sin(DEF_ANGLE)
+            vcos = cos(DEF_ANGLE)
+            vy = vsin*TEXT_DF + vcos*TEXT_DF
+            vx = -vsin*TEXT_DF + vcos*TEXT_DF
             
-            self.def_text.render(screen, (200,340+n*vdif), angle=DEF_ANGLE)
+            self.def_text.render(screen, (200+vx,340+n*vy), angle=DEF_ANGLE)
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()

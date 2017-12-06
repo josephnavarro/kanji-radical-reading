@@ -16,7 +16,7 @@ ANGLE     = 3.75
 SCALE     = 1.5
 MINISCALE = 0.8
 KANJISIZE = 128,128
-WORD_LONG = 12
+WORD_LONG = 10
 
 ## Font sizes
 TEXT_LG = 108

@@ -24,11 +24,18 @@ class Question:
         definition = definition[0].strip()
 
         defs = definition.split(' ')
-        if len(defs) >= 2:
-            if len(defs[0] + defs[1]) < WORD_LONG:
-                defs = [defs[0] + ' ' + defs[1]] + defs[2:]
+        output = []
+        string = ''
+        for d in defs:            
+            string += d+' '
+            if len(string) >= WORD_LONG:
+                output.append(string)
+                string = ''
 
-        self.definition = defs[:]
+        if len(string) != 0:
+            output.append(string)
+
+        self.definition = output[:]
         
         
         a = kana['order'][0]
