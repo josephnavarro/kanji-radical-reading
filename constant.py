@@ -20,12 +20,13 @@ KANJISIZE = 128,128
 ## Font sizes
 TEXT_LG = 108
 TEXT_MD = 68
+TEXT_DF = 48
 TEXT_SM = 36
 
 ## GUI button placement
 KANJI_VERT       = [H//4 for n in range(2)]
 KANJI_HORZ       = [32+W*3//18, 32+W*8//18]
-MAIN_BUTTON_HORZ = [32, W//2 + 64]
+MAIN_BUTTON_HORZ = [64, W//2 + 64]
 MAIN_BUTTON_VERT = [H//2 + 64 for n in range(2)]
 BUTTON_HORZ      = [480 for n in range(3)]      ## Button y-coordinates
 BUTTON_VERT      = [32 + 176 * n for n in range(3)] ## Button x-coordinates

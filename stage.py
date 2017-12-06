@@ -76,7 +76,7 @@ class Stage:
         self.text      = Text(size=TEXT_LG)
         self.btn_text  = Text(size=TEXT_MD)
         self.back_text = Text(size=TEXT_SM)
-        self.def_text  = Text(size=TEXT_SM)
+        self.def_text  = Text(size=TEXT_DF)
 
     def re_init(self, is_onyomi):
         ## Re-initialization routine
