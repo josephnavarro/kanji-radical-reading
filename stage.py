@@ -89,7 +89,7 @@ class Stage:
         self.strikes = 0
         shffl(self.questions)
         self.is_onyomi = is_onyomi
-        self.return_button = Button((32,H-128), "BACK", *self.button_images[:2], self.return_main, angle=-12)
+        self.return_button = Button((32,H-128), "BACK", self.button_images[0], self.button_images[1], self.return_main, angle=-12)
 
     def get_mode(self):
         return self.mode

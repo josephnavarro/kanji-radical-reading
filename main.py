@@ -58,8 +58,8 @@ class Wrapper:
 
         text_blank = Text()
 
-        self.onyomi_button  = Button(pos1, text_blank, *self.button_img[:2],  toggle_radical)
-        self.radical_button = Button(pos2, text_blank, *self.button_img[2:4], toggle_onyomi)
+        self.onyomi_button  = Button(pos1, text_blank, self.button_img[0], self.button_img[1],  toggle_radical)
+        self.radical_button = Button(pos2, text_blank, self.button_img[2], self.button_img[3], toggle_onyomi)
 
     def render(self, screen):
         ## Render buttons
