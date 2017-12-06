@@ -156,7 +156,7 @@ class Stage:
             vy = n*(vsin*TEXT_DD + vcos*TEXT_DD)
             vx = n*(-vsin*TEXT_DD + vcos*TEXT_DD)
             
-            self.def_text.render(screen, (200+vx,340+vy), angle=DEF_ANGLE)
+            self.def_text.render(screen, (240+vx,340+vy), angle=DEF_ANGLE)
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
