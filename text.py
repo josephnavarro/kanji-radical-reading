@@ -8,7 +8,7 @@ class Text:
     def __init__(self, text='', size=FONTSIZE):
         ## Blittable text object
         path      = os.path.join(DIR_ROOT, DIR_FONT)
-        filename  = list(glob.glob(path + '/*.ttf'))[0]
+        filename  = path + '/font.ttf' #list(glob.glob(path + '/*.ttf'))[0]
         self.font = pygame.font.Font(filename, size)
         self.init_render(text)
 
