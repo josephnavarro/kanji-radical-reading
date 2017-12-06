@@ -16,12 +16,14 @@ ANGLE     = 3.75
 SCALE     = 1.5
 MINISCALE = 0.8
 KANJISIZE = 128,128
+WORD_LONG = 12
 
 ## Font sizes
 TEXT_LG = 108
 TEXT_MD = 68
 TEXT_DF = 48
 TEXT_SM = 36
+DEF_ANGLE = -12
 
 ## GUI button placement
 KANJI_VERT       = [H//4 for n in range(2)]

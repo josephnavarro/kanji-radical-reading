@@ -2,6 +2,7 @@
 import pygame
 from   pygame.locals import *
 from   random        import shuffle as shffl
+from   math          import sin, cos, degrees
 from   question      import *
 from   utility       import *
 from   text          import *
@@ -117,11 +118,11 @@ class Stage:
         screen.blit(temp_img, (-5,-5))
 
         ## Render buttons on the side
-        buttons    = self.questions[self.current].get_button_text()
-        pressed    = self.questions[self.current].get_button_pressed()
-        angles     = self.questions[self.current].get_button_angle()
-        sizes      = self.questions[self.current].get_button_size()
-        definition = self.questions[self.current].get_definition()
+        buttons = self.questions[self.current].get_button_text()
+        pressed = self.questions[self.current].get_button_pressed()
+        angles  = self.questions[self.current].get_button_angle()
+        sizes   = self.questions[self.current].get_button_size()
+        defs    = self.questions[self.current].get_definition()
         
         for n in range(len(buttons)):
             self.btn_text.render_new(buttons[n], RED)
@@ -147,8 +148,14 @@ class Stage:
             self.return_button.y+h2//2-h1*2//3+y),
                               angle = -12)
 
-        self.def_text.render_new(definition, color=BLACK)
-        self.def_text.render(screen, (200,340), angle=-12)
+        for n in range(len(defs)):
+            self.def_text.render_new(defs[n], color=BLACK)
+
+            vsin = sin(DEF_ANGLE) * TEXT_DF*2/3
+            vcos = cos(DEF_ANGLE) * TEXT_DF*2/3
+            vdif = vsin + vcos
+            
+            self.def_text.render(screen, (200,340+n*vdif), angle=DEF_ANGLE)
         
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()

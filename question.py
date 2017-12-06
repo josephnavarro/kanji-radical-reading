@@ -19,9 +19,17 @@ def incorrect():
 class Question:
     def __init__(self, button_images, radical_labels, kanji_images, kana, other_kana, definition, is_onyomi):
         self.images = kanji_images
-        self.base       = kana['base']
-        self.other      = kana['other']
-        self.definition = definition[0].strip()
+        self.base  = kana['base']
+        self.other = kana['other']
+        definition = definition[0].strip()
+
+        defs = definition.split(' ')
+        if len(defs) >= 2:
+            if len(defs[0] + defs[1]) < WORD_LONG:
+                defs = [defs[0] + ' ' + defs[1]] + defs[2:]
+
+        self.definition = defs[:]
+        
         
         a = kana['order'][0]
         b = kana['order'][1]
