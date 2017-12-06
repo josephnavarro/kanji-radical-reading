@@ -89,6 +89,7 @@ class Main:
         pygame.display.set_caption(TITLE)           ## Set window caption
         pygame.mouse.set_visible(False)
         self.window = pygame.display.set_mode(self.size) ## Create window
+        pygame.display.set_icon(load_image(ICONPATH))
         self.screen = pygame.Surface(SIZE)          ## Create blitting surface
         self.clock  = pygame.time.Clock()           ## FPS throttler
         self.mode   = MODE_TITLE                    ## Current game state

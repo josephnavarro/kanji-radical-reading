@@ -17,10 +17,12 @@ def incorrect():
     return False
 
 class Question:
-    def __init__(self, button_images, radical_labels, kanji_images, kana, other_kana, definition, is_onyomi):
-        self.images = kanji_images
+    def __init__(self, button_images, radical_labels, fulls, parts, kana, other_kana, definition, is_onyomi):
+        self.fulls = fulls
+        self.parts = parts
         self.base  = kana['base']
         self.other = kana['other']
+        self.is_onyomi = is_onyomi
         definition = definition[0].strip()
 
         defs = definition.split(' ')
@@ -99,8 +101,12 @@ class Question:
         return [b.isPressed for b in self.buttons]
 
     def render(self, screen):
-        for n in range(len(self.images)):
-            image = self.images[n]
+        images = self.fulls
+        if self.is_onyomi:
+            images = self.parts
+
+        for n in range(len(images)):
+            image = images[n]
             screen.blit(image, image.get_rect(center=(KANJI_HORZ[n], KANJI_VERT[n])))
 
     def render_buttons(self, screen):

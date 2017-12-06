@@ -4,7 +4,7 @@ import os
 ## Constants
 ## Constant values used in other files
 
-TITLE     = "Read Kanji with Radicals" ## Window caption
+TITLE     = "Kanji by Radical" ## Window caption
 SIZE      = W,H = 800,600              ## Screen size
 SMALL     = W*2//3, H*2//3             ## Small screen
 FPS       = 60                         ## Screen refresh rate
@@ -75,6 +75,7 @@ CHAR_KEN        = 'ken.png'
 CHAR_SEI        = 'sei.png'
 GAME_BACKGROUND1 = 'game1.png'
 GAME_BACKGROUND2 = 'game2.png'
+ICONFILE        = 'icon.png'
 
 ## Parser delimiters
 DASH    = '-'
@@ -85,9 +86,10 @@ COMMA   = ','
 PNGWILD = '/*.png'
 
 ## Image paths
-BGPATH1 = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND1)
-BGPATH2 = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND2)
-DGPATH = os.path.join(DIR_ROOT, DIR_IMG, DAGGER_IMG)
+BGPATH1  = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND1)
+BGPATH2  = os.path.join(DIR_ROOT, DIR_IMG, GAME_BACKGROUND2)
+ICONPATH = os.path.join(DIR_ROOT, DIR_IMG, ICONFILE)
+DGPATH   = os.path.join(DIR_ROOT, DIR_IMG, DAGGER_IMG)
 BTNPATH1 = [
     os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG3A),
     os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG3B),

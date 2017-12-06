@@ -29,19 +29,22 @@ class Stage:
         for w in wlist:
             k   = w[0]
             p   = word_parts[k]
-            ims = []
+            full_ims = []
+            part_ims = []
             for q in p:
                 if q in bkey:
-                    ims.append(base_img[q][tag])
+                    full_ims.append(base_img[q][KEY_FULL])
+                    part_ims.append(base_img[q][KEY_NONE])
                 else:
-                    ims.append(word_img[k])
+                    full_ims.append(word_img[k])
+                    part_ims.append(word_img[k])
 
             shffl(others)
             b = self.button_images[2:]
             if not is_onyomi:
                 bimg = self.button_images[:2]
                 
-            new = Question(b, self.labels, ims, kana[k], others[:2], word_defs[k], is_onyomi)
+            new = Question(b, self.labels, full_ims, part_ims, kana[k], others[:2], word_defs[k], is_onyomi)
             self.questions.append(new)
 
         self.re_init(is_onyomi)
