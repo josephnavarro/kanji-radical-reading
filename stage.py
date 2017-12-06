@@ -90,15 +90,21 @@ class Stage:
         shffl(self.questions)
         self.is_onyomi = is_onyomi
         self.return_button = Button((32,H-128), "BACK", self.button_images[0], self.button_images[1], self.return_main, angle=-12)
+        self.next_button = Button((240,H-100), "NEXT", self.button_images[0], self.button_images[1], self.next_question, angle=1)
+
+        for q in self.questions:
+            q.do_continue = False
 
     def get_mode(self):
         return self.mode
           
     def next_question(self):
         ## Go to the next question
-        self.current += 1
-        if self.current == len(self.questions):
-            self.current = 0
+        if self.questions[self.current].do_continue:
+            self.questions[self.current].do_continue = False
+            self.current += 1
+            if self.current == len(self.questions):
+                self.current = 0
 
     def render(self, screen):
         ## Renders self to screen
@@ -155,6 +161,19 @@ class Stage:
             self.return_button.y+h2//2-h1*2//3+y),
                               angle = -12)
 
+        if self.questions[self.current].do_continue:
+            self.next_button.render(screen)
+            w1,h1 = self.back_text.blittable.get_size()
+            w2,h2 = self.button_sizes[0]
+            x,y = 0,0
+            if self.next_button.isPressed:
+                x,y = PRESS_X, PRESS_Y
+            self.back_text.render_new(self.next_button.text, color=(255,0,0))
+            self.back_text.render(screen, (
+                self.next_button.x+w2//2-w1//4+x,
+                self.next_button.y+h2//2-h1*2//3+y),
+                                  angle = 1)
+
         for n in range(len(defs)):
             self.def_text.render_new(defs[n], color=BLACK)
 
@@ -167,12 +186,10 @@ class Stage:
         
     def update(self, e, mouseClick, tick):              
         ## Generic update method called by Main.main()
-        if self.questions[self.current].update(e, mouseClick)():
-            if self.questions[self.current].do_continue:
-                self.questions[self.current].do_continue = False
-                self.next_question()
+        self.questions[self.current].update(e, mouseClick)()
                 
         self.return_button.update(e, mouseClick)()
+        self.next_button.update(e, mouseClick)()
         
 
         
