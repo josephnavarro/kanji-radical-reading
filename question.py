@@ -35,7 +35,7 @@ class Question:
         if len(string) != 0:
             output.append(string)
 
-        self.definition = output[:]
+        self.definition = [s.strip() for s in output]
         
         
         a = kana['order'][0]
