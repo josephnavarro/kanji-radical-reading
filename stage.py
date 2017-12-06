@@ -110,12 +110,16 @@ class Stage:
         ## Render readings to screen
         for n in range(len(self.questions[self.current].readings)):
             text = self.questions[self.current].readings[n]
-            if self.is_onyomi or self.questions[self.current].answer_at != n:
+            if self.is_onyomi:
                 self.text.render_new(text)
                 self.text.render(self.temp_surf, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
-            elif not self.is_onyomi and self.questions[self.current].answer_at == n:
-                self.text.render_new('★',WHITE)
-                self.text.render(self.temp_surf, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
+            else:
+                if self.questions[self.current].answer_at != n or self.questions[self.current].do_continue:
+                    self.text.render_new(text)
+                    self.text.render(self.temp_surf, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
+                elif self.questions[self.current].answer_at == n:
+                    self.text.render_new('★',WHITE)
+                    self.text.render(self.temp_surf, (KANJI_HORZ[n], KANJI_VERT[n] + OFFSET_Y))
 
         temp_img = smooth_rotate(self.temp_surf, -5)
         screen.blit(temp_img, (-5,-5))
@@ -164,7 +168,9 @@ class Stage:
     def update(self, e, mouseClick, tick):
         ## Generic update method called by Main.main()
         if self.questions[self.current].update(e, mouseClick)():
-            self.next_question()
+            if self.questions[self.current].do_continue:
+                self.questions[self.current].do_continue = False
+                self.next_question()
         self.return_button.update(e, mouseClick)()
         
 

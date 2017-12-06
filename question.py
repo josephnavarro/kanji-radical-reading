@@ -23,6 +23,7 @@ class Question:
         self.base  = kana['base']
         self.other = kana['other']
         self.is_onyomi = is_onyomi
+        self.do_continue = False
         definition = definition[0].strip()
 
         defs = definition.split(' ')
@@ -102,7 +103,7 @@ class Question:
 
     def render(self, screen):
         images = self.fulls
-        if self.is_onyomi:
+        if self.is_onyomi and not self.do_continue:
             images = self.parts
 
         for n in range(len(images)):
@@ -116,10 +117,15 @@ class Question:
     def update(self, e, mouseClick):
         fxn = incorrect
         
+        for event in e:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.do_continue:
+                    fxn = correct
+        
         for b in self.buttons:
             result = b.update(e, mouseClick)
             if result():
-                fxn = correct
+                self.do_continue = True
 
         return fxn
 
