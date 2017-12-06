@@ -165,12 +165,13 @@ class Stage:
             
             self.def_text.render(screen, (240+vx,340+vy), angle=DEF_ANGLE)
         
-    def update(self, e, mouseClick, tick):
+    def update(self, e, mouseClick, tick):              
         ## Generic update method called by Main.main()
         if self.questions[self.current].update(e, mouseClick)():
             if self.questions[self.current].do_continue:
                 self.questions[self.current].do_continue = False
                 self.next_question()
+                
         self.return_button.update(e, mouseClick)()
         
 

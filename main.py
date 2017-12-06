@@ -109,6 +109,7 @@ class Main:
 
     def init_sound(self):
         ## Initializes BGM, among other things
+        self.click_sound = pygame.mixer.Sound(SFX1_PATH)
         pygame.mixer.music.load(BGM_PATH)
         pygame.mixer.music.set_volume(0.35)
         pygame.mixer.music.play()
@@ -234,6 +235,10 @@ class Main:
         while True:
             tick = self.clock.tick(FPS) / 1000.0
             e    = pygame.event.get()
+            
+            for ev in e:
+                if ev.type == pygame.MOUSEBUTTONDOWN:
+                    self.click_sound.play()
 
             if pygame.mouse.get_pressed()[0] and not self.mouse_animating:
                 self.mouse_animating = True

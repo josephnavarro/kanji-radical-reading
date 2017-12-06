@@ -78,6 +78,8 @@ GAME_BACKGROUND1 = 'game1.png'
 GAME_BACKGROUND2 = 'game2.png'
 ICONFILE         = 'icon.png'
 BGM_FILE         = 'bgm.ogg'
+SFX1_FILE        = 'sfx1.ogg'
+SFX2_FILE        = 'sfx2.ogg'
 
 ## Parser delimiters
 DASH    = '-'
@@ -88,12 +90,14 @@ COMMA   = ','
 PNGWILD = '/*.png'
 
 ## Image paths
-BGPATH1  = os.path.join(DIR_ROOT, DIR_IMG,   GAME_BACKGROUND1)
-BGPATH2  = os.path.join(DIR_ROOT, DIR_IMG,   GAME_BACKGROUND2)
-BGM_PATH = os.path.join(DIR_ROOT, DIR_SOUND, BGM_FILE)
-ICONPATH = os.path.join(DIR_ROOT, DIR_IMG,   ICONFILE)
-DGPATH   = os.path.join(DIR_ROOT, DIR_IMG,   DAGGER_IMG)
-BTNPATH1 = [
+BGPATH1   = os.path.join(DIR_ROOT, DIR_IMG,   GAME_BACKGROUND1)
+BGPATH2   = os.path.join(DIR_ROOT, DIR_IMG,   GAME_BACKGROUND2)
+BGM_PATH  = os.path.join(DIR_ROOT, DIR_SOUND, BGM_FILE)
+SFX1_PATH = os.path.join(DIR_ROOT, DIR_SOUND, SFX1_FILE)
+SFX2_PATH = os.path.join(DIR_ROOT, DIR_SOUND, SFX2_FILE)
+ICONPATH  = os.path.join(DIR_ROOT, DIR_IMG,   ICONFILE)
+DGPATH    = os.path.join(DIR_ROOT, DIR_IMG,   DAGGER_IMG)
+BTNPATH1  = [
     os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG3A),
     os.path.join(DIR_ROOT, DIR_IMG, BUTTON_IMG3B),
     ]
