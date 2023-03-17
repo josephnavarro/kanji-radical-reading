@@ -1,4 +1,5 @@
-#!usr/bin/env python
+#! /usr/bin/env python
+import asyncio
 import pygame, os
 from   pygame.locals import *
 from   constant      import *
@@ -255,8 +256,39 @@ class Main:
             self.update(e, mouseClick, tick)
             #print(self.mode)
             self.render()
+
+    async def asyncmain(self):
+        ## Main game loop
+        clock = self.clock
+        click_sound = self.click_sound
+        update = self.update
+        render = self.render
+
+        while True:
+            tick = clock.tick(FPS) / 1000.0
+            e    = pygame.event.get()
             
+            for ev in e:
+                if ev.type == pygame.MOUSEBUTTONDOWN:
+                    click_sound.play()
+                    self.mouse_animating = True
+                elif ev.type == pygame.MOUSEBUTTONUP:
+                    self.mouse_animating = False
+
+            if self.mouse_animating:
+                self.mouse_counter += tick * 16
+                if int(round(self.mouse_counter)) >= 3:
+                    self.mouse_animating = False
+                    self.mouse_counter = 0
+            
+            mouseClick = get_input(e) ## Get mouse coords on click
+            
+            update(e, mouseClick, tick)
+            #print(self.mode)
+            render()
+            await asyncio.sleep(0)
+
 
 if __name__ == "__main__":
     main = Main(1)
-    main.main()
+    asyncio.run(main.asyncmain())

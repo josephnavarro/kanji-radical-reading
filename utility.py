@@ -67,7 +67,8 @@ def get_input(events):
             ## Keypress processing
             if e.key == K_ESCAPE:
                 ## Press ESC to exit window
-                _quit()
+                pass
+                # _quit()
         
         elif e.type == MOUSEBUTTONDOWN:
             ## Get mouse pos on click
