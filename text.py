@@ -1,8 +1,9 @@
-#!usr/bin/env python
-import pygame, glob, os
-from   pygame.locals import *
-from   constant      import *
-from   utility       import *
+import pygame
+import os
+from pygame.locals import *
+from constant import *
+from utility import *
+
 
 class Text:
     def __init__(self, text='', size=FONTSIZE):

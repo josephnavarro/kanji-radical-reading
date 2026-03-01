@@ -1,16 +1,19 @@
-#! /usr/bin/env python
+"""
+Application's primary entrypoint
+"""
 import asyncio
 import pygame, os
-from   pygame.locals import *
-from   constant      import *
-from   utility       import *
-from   stage         import *
-from   button        import *
-from   text          import *
+from pygame.locals import *
+from constant import *
+from utility import *
+from stage import *
+from button import *
+from text import *
+
 
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 pygame.mixer.pre_init(44100, -16, 2, 4096)
-## Primary entrypoint for application
+
 
 class Intermediate:
     def __init__(self):
